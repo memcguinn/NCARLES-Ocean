@@ -5,7 +5,7 @@
 MODULE pars
 !
   INTEGER, PARAMETER :: flg_stokes = 1     ! Stokes drift (0/1)
-  INTEGER, PARAMETER :: flg_reaction = 1   ! Carbonate chemistry reactions (0/1)
+  INTEGER, PARAMETER :: flg_reaction = 0   ! Carbonate chemistry reactions (0/1)
   INTEGER, PARAMETER :: iti=0,           & ! Start iteration for restart (default 0)
                         itmax=50000,     & ! Maximum number of iterations
                         imean=1,         & ! Time increment ???
@@ -14,14 +14,14 @@ MODULE pars
                         itstr=1,         & !
                         it_his = 99999     ! Iteration history for restart
 !
-  INTEGER, PARAMETER :: nscl = 8,        & ! Number of scalars (1 iff flg_reaction = 0, 8 if else)
+  INTEGER, PARAMETER :: nscl = 1,        & ! Number of scalars (1 iff flg_reaction = 0, 8 if else)
                         nvar = (4+nscl)    ! Total number of variables
-  INTEGER, PARAMETER :: nxg1  = 128,     & ! Number of cells in each direction
-                        nyg1  = 128,     &
-                        nzg1  = 128
-  INTEGER, PARAMETER :: maxnx = 128,     & ! Maximum number of points in each direction
-                        maxny = 128,     &
-                        maxnz = 128
+  INTEGER, PARAMETER :: nxg1  = 256,     & ! Number of cells in each direction
+                        nyg1  = 256,     &
+                        nzg1  = 256
+  INTEGER, PARAMETER :: maxnx = 256,     & ! Maximum number of points in each direction
+                        maxny = 256,     &
+                        maxnz = 256
   INTEGER, PARAMETER :: maxnz1 = maxnz + 1, maxnz2 = maxnz + 2, &
                         maxnx2 = maxnx + 2, maxny2 = maxny + 2
 !

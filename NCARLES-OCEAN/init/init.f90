@@ -35,8 +35,8 @@ SUBROUTINE init
   fcor    = 2.0*pi2*SIN(rlat*d_to_r)/(24.0*3600.0)  ! Coriolis Parameter
   ugcont  = 0.0                     !
   vgcont  = 0.0                     !
-  wtsfc(1) = 5.0e-7                 !
-  qstar(1) = wtsfc(1)               !
+  wtsfc(1) = 0.0                    ! Define surface cooling
+  qstar(1) = wtsfc(1)               ! Heat flux (see wrsfc, surface cooling)
 !
   dtdzf(1)=0.010
   dtjump  = 0.
@@ -78,7 +78,7 @@ SUBROUTINE init
 ! FOR UNIFORM VERTICAL SPACING
   IF (iz_space .EQ. 0) THEN
     DO iz=0,nnz+1
-      z(iz) = dz*FLOAT(iz) + zwstrt ! build x grid for w points
+      z(iz) = dz*FLOAT(iz) + zwstrt   ! Build x grid for w points
     ENDDO
   ELSE
     CALL vgrid(zw1,zi,zl,nnz,z(0),l_root,l_debug)

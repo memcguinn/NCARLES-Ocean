@@ -7,9 +7,9 @@ SUBROUTINE speed2stress(u_10,v_10,cd_10,tau_x,tau_y)
 ! ---------------------------------------------------------------------------- !
 !
 ! WIND SPEED IN [5,10] m/s
-  u_10 = 5.75
-  v_10 = 0.0
-  s_10 = SQRT(u_10**2 + v_10**2)
+  u_10 = 5.75                                   ! Wind strength to change La_t
+  v_10 = 0.0                                    ! Wind strength in v
+  s_10 = SQRT(u_10**2 + v_10**2)                ! 10m wind speed
 !
 ! DRAG COEFFICIENT
   cd_fac = 0.7

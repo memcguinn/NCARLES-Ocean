@@ -26,6 +26,7 @@ SUBROUTINE stokesv
 ! SET PARAMETERS
   range_min = 0.1
   range_max = 5000.0
+!
   DO iz=1,nnzp1
     z_pt = zz(iz)
     CALL s_int(range_min,range_max,value)
@@ -36,9 +37,11 @@ SUBROUTINE stokesv
       stokes(iz) = 0.0
     END IF
   END DO
+!
   IF (l_root) THEN
     WRITE (6,6000) (iz,zz(iz),stokes(iz),iz=1,nnz)
   END IF
+!
   dir_x = 1.0
   dir_y = 0.0
 !
