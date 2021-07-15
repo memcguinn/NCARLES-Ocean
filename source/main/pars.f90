@@ -12,7 +12,7 @@ MODULE pars
                         ihst=1,          & ! Frequency of history files
                         itape=100,       & ! Frequency for data outputs
                         itstr=1,         & !
-                        it_his = 99999     ! Iteration history for restart
+                        it_his = 99999     ! Iteration history (keep large, do not change for restart)
 !
   INTEGER, PARAMETER :: nscl = 1,        & ! Number of scalars (1 iff flg_reaction = 0, 8 if else)
                         nvar = (4+nscl)    ! Total number of variables

@@ -27,7 +27,7 @@ SUBROUTINE restart
   END IF
 !
 ! GET CONSTANT FILE
-  iloc = index(path_res,' ')
+  iloc = index(path_res,' ')                ! Change iff write folder /= saved data folder
   path_res_c = path_res(1:iloc-1)//'.con'
 !
   INQUIRE (file=path_res_c,exist=there)
