@@ -29,7 +29,7 @@ PROGRAM les_mpi
 !
   ts_mpi   = mpi_wtime()
   ncpu_s   = 2                          ! Set number of x-y slab cpus
-  itn      = 0                          ! Input file number for restart (0, default)
+  itn      = 20                        ! Input file number for restart (0, default)
   case_inp = '30L'
 !
   CALL get_units

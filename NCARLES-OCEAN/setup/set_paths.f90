@@ -11,12 +11,12 @@ SUBROUTINE set_paths
 ! --------------------------------------------------------------------------- !
 !
 ! PATH AND FILE NAME OF VELOCITY RESTART FILE
-  path_res = './data/u.mp.30L00005'
+  path_res = './data/u.mp.30L00020'
 !
 ! SAVE PATH FOR 3D VOLUMES
   path_sav = './data'
 !
-! SAVE PATH FOR HISTORY FILES 
+! SAVE PATH FOR NEW HISTORY FILES
   path_his = './data'
 !
 RETURN

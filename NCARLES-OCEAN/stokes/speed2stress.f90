@@ -21,5 +21,6 @@ SUBROUTINE speed2stress(u_10,v_10,cd_10,tau_x,tau_y)
   tau_x  = cd_10*s_10*u_10
   tau_y  = cd_10*s_10*v_10
 !
+! implement way to calc stokes backwards
 RETURN
 END SUBROUTINE speed2stress

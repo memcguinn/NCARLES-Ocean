@@ -15,8 +15,8 @@ SUBROUTINE setup(it)
   it = iti
   it_counter = it - iti
 !
-! TURN ON NEW SGS MODEL AT DESIGNATED STEP 
-  IF (it .NE. 0) THEN
+! TURN ON NEW SGS MODEL AT DESIGNATED STEP
+  IF (iti .NE. 0) THEN
     IF (l_root) THEN
       WRITE (6,6) iti, utau, tsfcc(1), qstar(1)
       WRITE (6,510)
