@@ -17,7 +17,7 @@ MODULE tracerbc
   INTEGER, PARAMETER :: flg_debug = 0         ! Write debug file (0/1)
 !
   REAL, DIMENSION(nscl) :: tau,             & ! Reaction timescale
-                           airval             ! Value of air tracer (only need with asflux and flag_airseaflux)
+                           airval             ! Value of air tracer (only need with asflux on)
 !
   INTEGER, DIMENSION(nscl) :: ictype,       & ! Initial condition
                               rmodel,       & ! Reaction model type (0 - no reaction, 3 - carbonate chemistry)
@@ -62,8 +62,8 @@ CONTAINS
       ictype(iscl) = 1;
       val(iscl) = 7.56903;
       tau(iscl) = 1;
-      asflux(iscl) = 1;
-      airval(iscl) = 8.56056;
+      asflux(iscl) = 0;
+      airval(iscl) = 7.56903 * 1.1;             ! 10% Flux in from atmosphere
       np = nnz+2;
       zt = 0;
       rmodel(iscl) = 3;

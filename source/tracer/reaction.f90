@@ -14,7 +14,7 @@ MODULE reaction
   INTEGER, PARAMETER :: flg_debug = 0       ! Write debug file (0/1)
 !
 CONTAINS
-!
+! 
 ! --------------------------------------------------------------------------- !
 !
 ! CALCULATE THE SCALAR REACTION SOURCE TERM FOR GIVEN SCALAR AND POINT (rhs_scl)
