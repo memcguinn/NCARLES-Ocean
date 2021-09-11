@@ -1,5 +1,7 @@
 ! ============================================================================ !
 ! ABOUT:                                                                       !
+!         Runge-Kutta coefficients are set in this subroutine. Currently, the  !
+!         scheme is of Or(3) which is the default for NCARLES.                 !
 ! ============================================================================ !
 !
 SUBROUTINE setcon

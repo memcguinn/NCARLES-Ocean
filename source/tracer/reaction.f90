@@ -1,6 +1,7 @@
 ! ============================================================================ !
 ! ABOUT:                                                                       !
-!
+!         Stabilized Runge-Kutta Chebyshev solver of Or(2). Tolerances,        !
+!         uround, etc. set here.
 ! ============================================================================ !
 !
 MODULE reaction
@@ -14,7 +15,7 @@ MODULE reaction
   INTEGER, PARAMETER :: flg_debug = 0       ! Write debug file (0/1)
 !
 CONTAINS
-! 
+!
 ! --------------------------------------------------------------------------- !
 !
 ! CALCULATE THE SCALAR REACTION SOURCE TERM FOR GIVEN SCALAR AND POINT (rhs_scl)
@@ -63,7 +64,7 @@ CONTAINS
   FUNCTION intDriver(t_rkc, t_end, yGlobal, temper)
 !
     REAL, INTENT(in) :: t_rkc                 ! Time
-    REAL, INTENT(in) :: t_end, temper
+    REAL, INTENT(in) :: t_end, temper         ! t_end = time + dt/2
     REAL, INTENT(in), DIMENSION(0:nscl-2) :: yGlobal
     REAL, DIMENSION(0:nscl-2) :: intDriver
     REAL, DIMENSION(0:nscl-2) :: yLocal, yLocal2
@@ -89,7 +90,7 @@ CONTAINS
 !
 ! --------------------------------------------------------------------------- !
 !
-! DRIVER FUNCTION FOR RUNGE-KUTTA INTEGRATOR
+! DRIVER FUNCTION FOR RUNGE-KUTTA CHEBYSHEV INTEGRATOR
   FUNCTION rkc_driver(t_rkc2, t_end, work, yLocal, temper)
 !
     REAL, INTENT(in) :: t_rkc2                ! Next/new time

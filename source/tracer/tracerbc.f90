@@ -148,7 +148,7 @@ CONTAINS
       ENDDO
 !
       IF(flg_debug == 1) THEN
-          OPEN(13, file='tracerbc.txt',access='appEND')
+          OPEN(13, file='tracerbc.txt',access='append')
           WRITE(13,'(A)') '------------------------'
           WRITE(13,'(A,i3)') 'RUNNING FOR IT= ',it
           WRITE(13,'(A,f9.6)') 'Z for 5m above H', z(izi)+5.0
