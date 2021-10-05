@@ -105,7 +105,7 @@ CONTAINS
 !
     INTEGER nstep, m_max, i, m
 !
-    REAL abs_tol, rel_tol, UROUND, hmax, hmin, err, est
+    REAL abs_tol, rel_tol, uround, hmax, hmin, err, est
     REAL fac, temp1, temp2, t_rkc
 !
 !
@@ -113,10 +113,10 @@ CONTAINS
     nstep   = 0
     rel_tol = 1.0e-6
     abs_tol = 1.0e-10
-    UROUND  = 2.22e-16
-    m_max   = NINT(SQRT(rel_tol / (10.0 * UROUND)))
+    uround  = 2.22e-16
+    m_max   = NINT(SQRT(rel_tol / (10.0 * uround)))
     hmax    = ABS(t_end - t_rkc)
-    hmin    = 10.0 * UROUND * MAX(ABS(t_rkc), hmax)
+    hmin    = 10.0 * uround * MAX(ABS(t_rkc), hmax)
 !
     IF(m_max < 2)THEN
        m_max = 2
@@ -130,7 +130,7 @@ CONTAINS
     F_n = dydt(t_rkc, y_n, temper)
 !
 !   LOAD INITIAL ESTIMATE FOR EIGENVECTOR
-    IF(work(2) < UROUND) THEN
+    IF(work(2) < uround) THEN
        DO i = 0,nscl-2
           work(4+i) = F_n(i)
        ENDDO
@@ -149,7 +149,7 @@ CONTAINS
        ENDIF
 !
 !      FIRST STEP - ESTIMATE STEP SIZE
-       IF(work(2) < UROUND)THEN
+       IF(work(2) < uround)THEN
           work(2) = hmax
 !
           IF((work(3) * work(2)) > 1.0)THEN
@@ -191,7 +191,7 @@ CONTAINS
           work(2) = REAL((m*m - 1) / (1.54*work(3)))
        ENDIF
 !
-       hmin = 10.0 * UROUND * MAX(ABS(t_rkc), ABS(t_rkc + work(2)))
+       hmin = 10.0 * uround * MAX(ABS(t_rkc), ABS(t_rkc + work(2)))
 !
 !      PERFORM TENTATIVE TIME STEP
        yLocal = rkc_step(t_rkc, work(2), y_n, F_n, m, temper)
@@ -227,7 +227,7 @@ CONTAINS
           temp1 = 0.0
           temp2 = 0.0
 !
-          IF(work(1) < UROUND)THEN
+          IF(work(1) < uround)THEN
              temp2 = err**(1.0/3.0)
              IF(0.8 < (fac * temp2))THEN
                 fac = 0.8 /  temp2
@@ -283,10 +283,10 @@ CONTAINS
 !
     INTEGER itmax, i, iter, ind
 !
-    REAL UROUND, small, nrm1, nrm2, dynrm, sigma
+    REAL uround, small, nrm1, nrm2, dynrm, sigma
 !
 !
-    UROUND  = 2.22e-16
+    uround  = 2.22e-16
     itmax   = 50
     small   = 1.0 / hmax
     nrm1    = 0.0
@@ -302,30 +302,30 @@ CONTAINS
     nrm2 = SQRT(nrm2)
 !
     IF((nrm1 .NE. 0.0) .AND. (nrm2 .NE. 0.0))THEN
-       dynrm = nrm1 * SQRT(UROUND)
+       dynrm = nrm1 * SQRT(uround)
        DO i = 0,nscl-2
           v(i) = yLocal(i) + v(i) * (dynrm / nrm2)
        ENDDO
 !
     ELSEIF(nrm1 .NE. 0.0)THEN
 !
-       dynrm = nrm1 * SQRT(UROUND)
+       dynrm = nrm1 * SQRT(uround)
        DO i = 0,nscl-2
-          v(i) = yLocal(i) * (1.0 + SQRT(UROUND))
+          v(i) = yLocal(i) * (1.0 + SQRT(uround))
        ENDDO
 !
     ELSEIF(nrm2 .NE. 0.0)THEN
 !
-       dynrm = UROUND
+       dynrm = uround
        DO i = 0,nscl-2
           v(i) = v(i) * (dynrm / nrm2)
        ENDDO
 !
     ELSE
 !
-       dynrm = UROUND
+       dynrm = uround
        DO i = 0,nscl-2
-          v(i) = UROUND
+          v(i) = uround
        ENDDO
     ENDIF
 !
