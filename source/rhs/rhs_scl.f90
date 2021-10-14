@@ -12,6 +12,7 @@ SUBROUTINE rhs_scl(istep,iscl)
     USE fftwk
     USE con_data
     USE con_stats
+!    USE tracerbc
 !
     REAL :: fnt1(nnx,iys:iye,izs:ize),                         &
             tx(nnx,iys:iye), ty(nnx,iys:iye,izs:ize),          &
@@ -121,11 +122,11 @@ SUBROUTINE rhs_scl(istep,iscl)
               Sc = 2073.1d0 - 125.62d0*tscal + 3.6276d0*tscal*tscal &
                      - 0.043219d0*tscal*tscal*tscal
 !
-!             CALCULATE PISTON VELOCITY (WANNINKHOF, 1992 - EQ. 3)
+!             CALCULATE PISTON VELOCITY (WANNINKHOF, 1992 - EQ. 3), HENRYS
               kconst = (2.77778d-6)*0.31d0*5.75d0*5.75d0*SQRT(660.0d0/Sc)
 !
 !             CALCULATE SURFACE FLUX RATE
-              flux_l(ix,iy) = (kconst)*(8.325d0-t(ix,iy,iscl,iz))
+              flux_l(ix,iy) = (kconst)*(airval(iscl)-t(ix,iy,iscl,iz))
             ELSE
               flux_l(ix,iy) = sgn*0.5*w(ix,iy,izm1)* &
                                      (t(ix,iy,iscl,izm1)+t(ix,iy,iscl,iz))
