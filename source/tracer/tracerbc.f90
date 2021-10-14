@@ -63,7 +63,7 @@ CONTAINS
       val(iscl) = 7.56903;
       tau(iscl) = 1;
       asflux(iscl) = 0;
-      airval(iscl) = 7.56903 * 1.1;             ! 10% Flux in from atmosphere
+      airval(iscl) = 7.56903;             ! 10% Flux in from atmosphere
       np = nnz+2;
       zt = 0;
       rmodel(iscl) = 3;

@@ -66,6 +66,7 @@ CONTAINS
     REAL, INTENT(in) :: t_rkc                 ! Chemistry time
     REAL, INTENT(in) :: t_end, temper         ! t_end = time + dt/2
     REAL, INTENT(in), DIMENSION(0:nscl-2) :: yGlobal
+    REAL, DIMENSION(0:nscl-2) :: intDrivers
     REAL, DIMENSION(0:nscl-2) :: yLocal, yLocal2
     REAL, DIMENSION(0:4+nscl-1) :: workLocal
 !
@@ -525,8 +526,8 @@ CONTAINS
     reverse_coeff7 = forward_coeff7*K2s/Kb
 !
 !   REDUCED MODEL, QSS SPECIES H+
-    c(6) = (forward_coeff1*c(1) + reverse_coeff3*c(2) + forward_coeff5)/    &
-            (reverse_coeff1*c(2) + forward_coeff3*c(3) + reverse_coeff5*c(7))
+!    c(6) = (forward_coeff1*c(1) + reverse_coeff3*c(2) + forward_coeff5)/    &
+!            (reverse_coeff1*c(2) + forward_coeff3*c(3) + reverse_coeff5*c(7))
 !
     dy(0) = reverse_coeff1*c(2)*c(6)+reverse_coeff2*c(2)-forward_coeff1*    &
             c(1)-forward_coeff2*c(1)*c(7)
@@ -541,10 +542,10 @@ CONTAINS
             c(3)*c(4)+reverse_coeff7*c(5)*c(2)
     dy(4) = forward_coeff6*c(4)*c(7)- reverse_coeff6*c(5)+forward_coeff7*   &
             c(3)*c(4)-reverse_coeff7*c(5)*c(2)
-    dy(5) = 0
-!    dy(5) = forward_coeff1*c(1) + c(2)*(reverse_coeff3 -reverse_coeff1*c(6) &
-!            ) - c(3)*forward_coeff3*c(6)+ forward_coeff5 - reverse_coeff5*  &
-!            c(6)*c(7)
+!   dy(5) = 0
+    dy(5) = forward_coeff1*c(1) + c(2)*(reverse_coeff3 -reverse_coeff1*c(6) &
+            ) - c(3)*forward_coeff3*c(6)+ forward_coeff5 - reverse_coeff5*  &
+            c(6)*c(7)
     dy(6) = reverse_coeff2*c(2)-forward_coeff2*c(1)*c(7)-forward_coeff4*    &
             c(2)*c(7)+reverse_coeff4*c(3)+forward_coeff5-reverse_coeff5*    &
             c(6)*c(7)-forward_coeff6*c(4)*c(7)+reverse_coeff6*c(5)
