@@ -12,7 +12,7 @@ SUBROUTINE rhs_scl(istep,iscl)
     USE fftwk
     USE con_data
     USE con_stats
-!    USE tracerbc
+    USE tracerbc, ONLY: airval
 !
     REAL :: fnt1(nnx,iys:iye,izs:ize),                         &
             tx(nnx,iys:iye), ty(nnx,iys:iye,izs:ize),          &

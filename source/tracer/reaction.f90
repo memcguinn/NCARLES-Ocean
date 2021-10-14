@@ -66,6 +66,7 @@ CONTAINS
     REAL, INTENT(in) :: t_rkc                 ! Chemistry time
     REAL, INTENT(in) :: t_end, temper         ! t_end = time + dt/2
     REAL, INTENT(in), DIMENSION(0:nscl-2) :: yGlobal
+    REAL, DIMENSION(0:nscl-2) :: intDriver
     REAL, DIMENSION(0:nscl-2) :: yLocal, yLocal2
     REAL, DIMENSION(0:4+nscl-1) :: workLocal
 !
