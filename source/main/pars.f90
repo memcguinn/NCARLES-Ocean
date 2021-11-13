@@ -7,10 +7,10 @@ MODULE pars
   INTEGER, PARAMETER :: flg_stokes = 1     ! Stokes drift (0/1)
   INTEGER, PARAMETER :: flg_reaction = 1   ! Carbonate chemistry reactions (0/1)
   INTEGER, PARAMETER :: iti=0,           & ! Start iteration for restart (default 0)
-                        itmax=100000,    & ! Maximum number of iterations
+                        itmax=50000,    & ! Maximum number of iterations
                         imean=1,         & ! Time increment ???
                         ihst=1,          & ! Frequency of history files
-                        itape=100,       & ! Frequency for data outputs
+                        itape=10,        & ! Frequency for data outputs
                         itstr=1,         & ! Frequency of iterations
                         it_his = 99999     ! Iteration history (keep large, do not change for restart)
 !
@@ -28,7 +28,7 @@ MODULE pars
   INTEGER, PARAMETER :: noalis=1,        & ! No aliasing
                         ismlt=0,         & ! Businger similarity constants (0/1)
                         ifree=0,         & ! Lower boundary condition
-                        isfc=1,          & ! Temperature boundary condition
+                        isfc=0,          & ! Temperature boundary condition
                         ibcu=0,          & ! Gradient boundary condition (0/1, on = 1)
                         ibcl=0,          & ! Lower boundary condition
                         iupwnd=1,        & ! Skew symmetric advection form for vertical flux (0/1)

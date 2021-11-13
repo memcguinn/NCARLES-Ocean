@@ -116,17 +116,19 @@ SUBROUTINE rhs_scl(istep,iscl)
               Sc = 0.0d0
               kconst = 0.0d0
               tscal = 0.0d0
-              tscal = t(ix,iy,1,iz) - 273.15d0
+              tscal = t(ix,iy,1,iz) - 273.15d0          ! Scale to C for Sc calculation
 !
 !             CALCULATE SCHMIDT NUMBER FOR CO2 (WANNINKHOF, 1992)
+!             FOLLOWS Sc = A - Bt + Ct^2 - Dt^3, CONSTANTS GIVEN
               Sc = 2073.1d0 - 125.62d0*tscal + 3.6276d0*tscal*tscal &
                      - 0.043219d0*tscal*tscal*tscal
 !
 !             CALCULATE PISTON VELOCITY (WANNINKHOF, 1992 - EQ. 3), HENRYS
+!             2.78e-6 DENOTES UNIT CONVERSION FACTOR OF CM/HR TO M/S
               kconst = (2.77778d-6)*0.31d0*5.75d0*5.75d0*SQRT(660.0d0/Sc)
 !
 !             CALCULATE SURFACE FLUX RATE
-              flux_l(ix,iy) = (kconst)*(airval(iscl)-t(ix,iy,iscl,iz))
+              flux_l(ix,iy) = (kconst)*(8.325-t(ix,iy,iscl,iz))
             ELSE
               flux_l(ix,iy) = sgn*0.5*w(ix,iy,izm1)* &
                                      (t(ix,iy,iscl,izm1)+t(ix,iy,iscl,iz))

@@ -103,7 +103,7 @@ SUBROUTINE lower(it)
         u(ix,iy,izm1)  = ubc(ix,iy,2)
         v(ix,iy,izm1)  = vbc(ix,iy,2)
         w(ix,iy,izm1)  = wbc(ix,iy,2)
-        r3(ix,iy,izm1) =  0.0
+        r3(ix,iy,izm1) = 0.0
         e(ix,iy,izm1)  = ebc(ix,iy,2)
         ux(ix,iy,izm1) = 0.0
         uy(ix,iy,izm1) = 0.0

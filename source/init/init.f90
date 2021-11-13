@@ -38,7 +38,7 @@ SUBROUTINE init
   wtsfc(1) = 0.0                    ! Define surface cooling
   qstar(1) = wtsfc(1)               ! Heat flux (see wrsfc, surface cooling)
 !
-  dtdzf(1)=0.010
+  dtdzf(1)= 0.010
   dtjump  = 0.
   divgls  = 0.
 !

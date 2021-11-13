@@ -8,6 +8,8 @@ SUBROUTINE set_paths
 !
     USE pars
 !
+!    namelist /restart_params/ path_res
+!
 ! --------------------------------------------------------------------------- !
 !
 ! PATH AND FILE NAME OF VELOCITY RESTART FILE
