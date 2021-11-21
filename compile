@@ -73,3 +73,5 @@ cd ../
 cp code/lesmpi .
 echo 4 > mach.file
 echo '---> Executable Made and Copied'
+echo '---> Complete Program Compile for' $rund
+echo ''
