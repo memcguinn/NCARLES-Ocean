@@ -4,53 +4,45 @@
 !
 MODULE pars
 !
-  INTEGER, PARAMETER :: flg_stokes = 1
-  INTEGER, PARAMETER :: flg_reaction = 1
-  INTEGER, PARAMETER :: iti=0,            &
-                        itmax=9e8,        &
-                        imean=1,          &
-                        ihst=01,          &
-                        itape=1,          &
-                        itstr=1,          &
-                        it_his=99999,     &
+  INTEGER, PARAMETER :: flg_stokes = 1      ! Stokes drift (0/1)
+  INTEGER, PARAMETER :: flg_reaction = 1    ! Carbonate chemistry reactions (0/1)
+  INTEGER, PARAMETER :: iti=0000,         & ! Start iteration for restart (default 0)
+                        itmax=5e4,        & ! Maximum number of iterations
+                        imean=1,          & ! Time increment ???
+                        ihst=1,           & ! Frequency of history files
+                        itape=1,          & ! Frequency for data outputs
+                        itstr=1,          & ! Frequency of iterations
+                        it_his=99999,     & ! Iteration history (keep large, do not change for restart)
                         i_viz=99999
 !
-  INTEGER, PARAMETER :: nscl = 8,         &
-                        nvar = (4+nscl)
-  INTEGER, PARAMETER :: nxg1  = 128,      &
-                        nyg1  = 128,      &
-                        nzg1  = 128
-  INTEGER, PARAMETER :: maxnx = 128,      &
-                        maxny = 128,      &
-                        maxnz = 128
+  INTEGER, PARAMETER :: nscl = 8,         & ! Number of scalars (1 iff flg_reaction = 0, 8 if else)
+                        nvar = (4+nscl)     ! Total number of variables
+  INTEGER, PARAMETER :: nxg1  = 128,      & ! Number of cells in x-direction
+                        nyg1  = 128,      & ! Number of cells in y-direction
+                        nzg1  = 128         ! Number of cells in z-direction
+  INTEGER, PARAMETER :: maxnx = 128,      & ! Maximum number of points in x-direction
+                        maxny = 128,      & ! Maximum number of points in y-direction
+                        maxnz = 128         ! Maximum number of points in z-direction
   INTEGER, PARAMETER :: maxnz1 = maxnz + 1, maxnz2 = maxnz + 2, &
                         maxnx2 = maxnx + 2, maxny2 = maxny + 2
-  REAL, PARAMETER    :: airseaflux_time = 60.0, airsea_val = 8.57
 !
-  INTEGER, PARAMETER :: noalis=1,         &
-                        ismlt=0,          &
-                        ifree=0,          &
-                        isfc=0,           &
-                        iradup=0,         &
-                        iupwnd=1,         &
-                        ibuoy=1,          &
-                        ifilt=0,          &
-                        itcut=1,          &
-                        isubs=0,          &
-                        ibrcl=0,          &
-                        iocean=1,         &
-                        method=3,         &
-                        idebug=0,         &
-                        iz_space=0,       &
-                        ihurr=0,          &
-                        ivis0=1,          &
-                        ifix_dt=1,        &
-                        new_vis=-1,       &
-                        i_dear = 0,       &
-                        force_tracer=0
+  INTEGER, PARAMETER :: noalis=1,         & ! No aliasing
+                        ismlt=0,          & ! Businger similarity constants (0/1)
+                        ifree=0,          & ! Lower boundary condition
+                        isfc=0,           & ! Temperature boundary condition
+                        iupwnd=1,         & ! Skew symmetric advection form for vertical flux (0/1)
+                        ibuoy=1,          & ! Buoyancy effects
+                        itcut=1,          & ! Iteration cutoff ???
+                        method=3,         & ! See pbltop for description
+                        idebug=0,         & ! Write debug file (0/1)
+                        iz_space=0,       & ! Varied vertical spacing (0/1)
+                        ivis0=1,          & ! THIS CAN PROB BE REMOVED
+                        ifix_dt=1,        & ! Fixed time step (0/1)
+                        new_vis=-1,       & ! THIS CAN PROB BE REMOVED
+                        i_dear = 0,         ! Deardorff stability (0/1)
 !
-  INTEGER, PARAMETER :: j_recl=4
-  INTEGER, PARAMETER :: k8=8 
+  INTEGER, PARAMETER :: j_recl=4            ! Record length in "bytes" for history file
+  INTEGER, PARAMETER :: k8=8                ! Kind parameter for integers in mpi_io routines
 !
 !
 ! ------------------------------- DEFINITIONS -------------------------------- !

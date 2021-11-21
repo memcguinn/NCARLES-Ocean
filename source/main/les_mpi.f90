@@ -50,11 +50,7 @@ PROGRAM les_mpi
      CALL setup(it)
 !
 !    CHOOSE ROUTINE FOR GETTING INITIAL GUESS
-     IF (iocean .EQ. 1) THEN
-        CALL randoc
-     ELSE
-        CALL random
-     END IF
+     CALL randoc
 !
      CALL get_max
   ELSE
@@ -77,7 +73,7 @@ PROGRAM les_mpi
   END IF
 !
 ! 3 STAGE RUNGE-KUTTA TIME-STEPPING
-  DO  8999 istage=1,3
+  DO 8999 istage=1,3
 !
   dtzeta = dt*zetas(istage)
   dtgama = dt*gama(istage)
@@ -164,8 +160,10 @@ PROGRAM les_mpi
 !
   te_mpi = mpi_wtime()
 !
+! ---------------------------------- FORMAT ---------------------------------- !
   WRITE(6,9997) (te_mpi - ts_mpi)
   9997 FORMAT(' Job Execution Time = ',e15.6)
+!------------------------------------------------------------------------------!
 !
   9998 CONTINUE
 !
@@ -173,4 +171,4 @@ PROGRAM les_mpi
 !
 STOP
 !
-END
+END PROGRAM les_mpi
