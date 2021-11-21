@@ -39,7 +39,7 @@ MODULE pars
                         ivis0=1,          & ! THIS CAN PROB BE REMOVED
                         ifix_dt=1,        & ! Fixed time step (0/1)
                         new_vis=-1,       & ! THIS CAN PROB BE REMOVED
-                        i_dear = 0,         ! Deardorff stability (0/1)
+                        i_dear = 0          ! Deardorff stability (0/1)
 !
   INTEGER, PARAMETER :: j_recl=4            ! Record length in "bytes" for history file
   INTEGER, PARAMETER :: k8=8                ! Kind parameter for integers in mpi_io routines
