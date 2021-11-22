@@ -9,6 +9,7 @@ SUBROUTINE restart
     USE fields
     USE con_data
     USE con_stats
+    USE inputs
 !
     CHARACTER*80 path_res_c
 !

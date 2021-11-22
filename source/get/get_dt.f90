@@ -9,6 +9,7 @@ SUBROUTINE get_dt(it,istart)
     USE pars
     USE con_data
     USE con_stats
+    USE inputs
 !
     DATA dt_max /30.0/
     SAVE dt_max

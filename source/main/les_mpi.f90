@@ -1,6 +1,6 @@
 ! ============================================================================ !
 ! ABOUT:                                                                       !
-!         les_mpi is the primary PROGRAM which runs NCARLES-Ocean.             !
+!         les_mpi is the primary program which runs NCARLES-Ocean.             !
 ! ============================================================================ !
 !
 PROGRAM les_mpi
@@ -10,6 +10,7 @@ PROGRAM les_mpi
   USE con_data
   USE con_stats
   USE tracerbc, ONLY: applytracerbc
+  USE inputs
 !
   INCLUDE 'mpif.h'
 !
@@ -31,7 +32,6 @@ PROGRAM les_mpi
 !
   ncpu_s = 32
 !
-  itn      = 0
   case_inp = '30L'
 !
   CALL get_units

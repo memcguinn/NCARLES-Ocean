@@ -5,9 +5,8 @@
 MODULE pars
 !
   INTEGER, PARAMETER :: flg_stokes = 1      ! Stokes drift (0/1)
-  INTEGER, PARAMETER :: flg_reaction = 1    ! Carbonate chemistry reactions (0/1)
-  INTEGER, PARAMETER :: iti=0000,         & ! Start iteration for restart (default 0)
-                        itmax=5e4,        & ! Maximum number of iterations
+  INTEGER, PARAMETER :: flg_reaction = 0    ! Carbonate chemistry reactions (0/1)
+  INTEGER, PARAMETER :: itmax=5e4,        & ! Maximum number of iterations
                         imean=1,          & ! Time increment ???
                         ihst=1,           & ! Frequency of history files
                         itape=1,          & ! Frequency for data outputs
@@ -15,7 +14,7 @@ MODULE pars
                         it_his=99999,     & ! Iteration history (keep large, do not change for restart)
                         i_viz=99999
 !
-  INTEGER, PARAMETER :: nscl = 8,         & ! Number of scalars (1 iff flg_reaction = 0, 8 if else)
+  INTEGER, PARAMETER :: nscl = 1,         & ! Number of scalars (1 iff flg_reaction = 0, 8 if else)
                         nvar = (4+nscl)     ! Total number of variables
   INTEGER, PARAMETER :: nxg1  = 128,      & ! Number of cells in x-direction
                         nyg1  = 128,      & ! Number of cells in y-direction
@@ -53,16 +52,16 @@ MODULE pars
 !
   INTEGER ::    it_counter
 !
-! ----------------------------------------------------------------------
+!------------------------------------------------------------------------------!
   CHARACTER case*3
 !
-! ----------------------------------------------------------------------
+!------------------------------------------------------------------------------!
   INTEGER  ::   nvel, npre, nhis1, nprt,                            &
                 nhisp, nvelc,                                       &
                 nviz_z, nviz_y,                                     &
                 nviz_x, nviz_s,                                     &
                 kfile, jfile, ibcl, ibcu,                           &
-                igrdr, imach, itn, it_nxt
+                igrdr, imach, it_nxt
 !
   LOGICAL ::    mnout, micut, mtape, mhis, msave,                   &
                 l_root, l_debug, msave_v, mviz
