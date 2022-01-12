@@ -8,7 +8,6 @@ SUBROUTINE set_sav(it,istart)
     USE fields
     USE con_data
     USE con_stats
-    USE inputs
 !
     DATA ionce /0/
     SAVE ionce
@@ -16,7 +15,7 @@ SUBROUTINE set_sav(it,istart)
 ! --------------------------------------------------------------------------- !
 !
 ! INCREMENT TIME IF NOT FIRST TIME THROUGH
-  IF (it .NE. istart) THEN
+  IF (it .NE. istart) THEN  
     time=time+dt
   END IF
 !

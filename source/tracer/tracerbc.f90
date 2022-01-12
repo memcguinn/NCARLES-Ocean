@@ -47,7 +47,7 @@ CONTAINS
 ! ACTIVE TRACERS, TEMPERATURE
       iscl = 1;                                 !
       ictype(iscl) = 0;                         ! Initial condition, 1 or 5
-      val(iscl) = 298.15;
+      val(iscl) = 288.15;
       np = 0;
       zt = 0;
       bnd(:,iscl) = znptobnd(zt,np);
@@ -56,49 +56,49 @@ CONTAINS
 !   CARBON DIOXIDE
       iscl = 2;
       ictype(iscl) = 1;
-      val(iscl) = 7.56903;
+      val(iscl) = 6.48100;
       np = nnz+2;
       zt = 0;
       bnd(:,iscl) = znptobnd(zt,np);
 !   BICARBONATE
       iscl = 3;
       ictype(iscl) = 1;
-      val(iscl) = 1.67006e03;
+      val(iscl) = 1.67702e03;
       np = nnz+2;
       zt = 0;
       bnd(:,iscl) = znptobnd(zt,np);
 !   CARBONATE
       iscl = 4;
       ictype(iscl) = 1;
-      val(iscl) = 3.14655e02;
+      val(iscl) = 3.09065e02;
       np = nnz+2;
       zt = 0;
       bnd(:,iscl) = znptobnd(zt,np);
 !   BORIC ACID
       iscl = 5;
       ictype(iscl) = 1;
-      val(iscl) = 2.96936e02;
+      val(iscl) = 2.88057e02;
       np = nnz+2;
       zt = 0;
       bnd(:,iscl) = znptobnd(zt,np);
 !   TETRAHYDROXYBORATE
       iscl = 6;
       ictype(iscl) = 1;
-      val(iscl) = 1.18909e02;
+      val(iscl) = 1.27943e02;
       np = nnz+2;
       zt = 0;
       bnd(:,iscl) = znptobnd(zt,np);
 !   HYDROGEN ION
       iscl = 7;
       ictype(iscl) = 1;
-      val(iscl) = 6.30928e-03;
+      val(iscl) = 4.324599e-03;
       np = nnz+2;
       zt = 0;
       bnd(:,iscl) = znptobnd(zt,np);
 !   HYDROXIDE
       iscl = 8;
       ictype(iscl) = 1;
-      val(iscl) = 9.60492;
+      val(iscl) = 5.50130;
       np = nnz+2;
       zt = 0;
       bnd(:,iscl) = znptobnd(zt,np);

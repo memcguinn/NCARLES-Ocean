@@ -7,7 +7,6 @@
 SUBROUTINE get_output_filenames
 !
     USE pars
-    USE inputs
 !
     INCLUDE 'mpif.h'
 !

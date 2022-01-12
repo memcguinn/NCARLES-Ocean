@@ -9,7 +9,6 @@ SUBROUTINE setup(it)
     USE fftwk
     USE con_data
     USE con_stats
-    USE inputs
 !
 ! --------------------------------------------------------------------------- !
 !

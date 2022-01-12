@@ -31,6 +31,7 @@ PROGRAM les_mpi
   ts_mpi = mpi_wtime()
 !
   ncpu_s = 32
+  itn=0
 !
   case_inp = '30L'
 !

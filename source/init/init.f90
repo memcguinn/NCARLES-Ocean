@@ -22,7 +22,7 @@ SUBROUTINE init
 ! CASE SPECIFIC INPUTS
   rho_a   = 1.0                     ! Density of air
   rho_w   = 1000.0                  ! Density of water
-  t00     = 283.0                   !
+  t00     = 283                     !
   t00b    = 5000.0                  !
   cp_a    = 1.0057e03               ! Isobaric specific heat, air
   cp_w    = 4.20e03                 ! Isobaric specific heat, water - J/(kg K)
@@ -132,7 +132,7 @@ SUBROUTINE init
   cdbtm  = vk*vk/zody/zody
 !
 ! SET SURFACE FRICTION VELOCITY, ALSO IN SURFTO
-  utau  = SQRT(rho_a*(8.5e-4)*5.75*5.75/rho_w)
+  utau  = SQRT(rho_a*(8.5e-4)*10*10/rho_w)
   utau2 = utau*utau
 !
   IF (ibuoy .EQ. 0 .OR. qstar(1) .EQ. 0.) THEN
@@ -147,7 +147,7 @@ SUBROUTINE init
   vwsfc = -utau*utau
 !
 ! CHECK TSFCC IS GREATER THAN T00 FOR ISFC = 0,1
-  tsfcc(1) = 265.00
+  tsfcc(1) = 265
 !
   IF (l_root) THEN
       WRITE (6,80)

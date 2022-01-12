@@ -125,10 +125,10 @@ SUBROUTINE rhs_scl(istep,iscl)
 !
 !             CALCULATE PISTON VELOCITY (WANNINKHOF, 1992 - EQ. 3), HENRYS
 !             2.78e-6 DENOTES UNIT CONVERSION FACTOR OF CM/HR TO M/S
-              kconst = (2.77778d-6)*0.31d0*5.75d0*5.75d0*SQRT(660.0d0/Sc)
+              kconst = (2.77778d-6)*0.31d0*10.0*10.0*SQRT(660.0d0/Sc)
 !
 !             CALCULATE SURFACE FLUX RATE
-              flux_l(ix,iy) = (kconst)*(8.325-t(ix,iy,iscl,iz))
+              flux_l(ix,iy) =0! (kconst)*(8.325-t(ix,iy,iscl,iz))
             ELSE
               flux_l(ix,iy) = sgn*0.5*w(ix,iy,izm1)* &
                                      (t(ix,iy,iscl,izm1)+t(ix,iy,iscl,iz))

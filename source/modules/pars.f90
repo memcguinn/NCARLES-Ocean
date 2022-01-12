@@ -6,7 +6,8 @@ MODULE pars
 !
   INTEGER, PARAMETER :: flg_stokes = 1      ! Stokes drift (0/1)
   INTEGER, PARAMETER :: flg_reaction = 0    ! Carbonate chemistry reactions (0/1)
-  INTEGER, PARAMETER :: itmax=5e4,        & ! Maximum number of iterations
+  INTEGER, PARAMETER :: iti=0,            &
+                        itmax=5e4,        & ! Maximum number of iterations
                         imean=1,          & ! Time increment ???
                         ihst=1,           & ! Frequency of history files
                         itape=1,          & ! Frequency for data outputs
@@ -50,7 +51,7 @@ MODULE pars
                 izs, ize, ixs, ixe, jxs, jxe, kxs, kxe,             &
                 mxs, mxe, iss, ise, iys, iye, jys, jye
 !
-  INTEGER ::    it_counter
+  INTEGER ::    it_counter,itn
 !
 !------------------------------------------------------------------------------!
   CHARACTER case*3

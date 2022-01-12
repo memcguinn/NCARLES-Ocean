@@ -111,7 +111,7 @@ CONTAINS
 !
     t_rkc = t_rkc2
     nstep   = 0
-    rel_tol = 1.0e-6
+    rel_tol = 1.0e-7
     abs_tol = 1.0e-10
     uround  = 2.22e-16
     m_max   = NINT(SQRT(rel_tol / (10.0 * uround)))

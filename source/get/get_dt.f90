@@ -9,7 +9,6 @@ SUBROUTINE get_dt(it,istart)
     USE pars
     USE con_data
     USE con_stats
-    USE inputs
 !
     DATA dt_max /30.0/
     SAVE dt_max
@@ -32,7 +31,7 @@ SUBROUTINE get_dt(it,istart)
 !
 ! CHOOSE FIXED/VARIABLE TIME STEP
   IF (ifix_dt .NE. 0) THEN
-    dt_new = 10.0                       ! WARNING: IF USED, CHANGE TO FIT PROBLEM
+    dt_new = 10                       ! WARNING: IF USED, CHANGE TO FIT PROBLEM
   ELSE
 !
 ! NEW ESTIMATE OF BEST TIME STEP FROM CFL CONSTRAIN

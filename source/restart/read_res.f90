@@ -10,7 +10,6 @@ SUBROUTINE read_res
     USE fields
     USE con_data
     USE con_stats
-    USE inputs
 !
     INCLUDE 'mpif.h'
 !
