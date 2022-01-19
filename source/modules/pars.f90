@@ -5,7 +5,9 @@
 MODULE pars
 !
   INTEGER, PARAMETER :: flg_stokes = 1      ! Stokes drift (0/1)
-  INTEGER, PARAMETER :: flg_reaction = 0    ! Carbonate chemistry reactions (0/1)
+  INTEGER, PARAMETER :: flg_wavebreak = 0   ! Wave breaking (0/1)
+  INTEGER, PARAMETER :: flg_diurnal = 1     ! Diurnal forcing (0/1)
+  INTEGER, PARAMETER :: flg_reaction = 1    ! Carbonate chemistry reactions (0/1)
   INTEGER, PARAMETER :: iti=0,            &
                         itmax=5e4,        & ! Maximum number of iterations
                         imean=1,          & ! Time increment ???
@@ -17,9 +19,9 @@ MODULE pars
 !
   INTEGER, PARAMETER :: nscl = 1,         & ! Number of scalars (1 iff flg_reaction = 0, 8 if else)
                         nvar = (4+nscl)     ! Total number of variables
-  INTEGER, PARAMETER :: nxg1  = 128,      & ! Number of cells in x-direction
-                        nyg1  = 128,      & ! Number of cells in y-direction
-                        nzg1  = 128         ! Number of cells in z-direction
+  INTEGER, PARAMETER :: nxg1  = 64,      & ! Number of cells in x-direction
+                        nyg1  = 64,      & ! Number of cells in y-direction
+                        nzg1  = 64         ! Number of cells in z-direction
   INTEGER, PARAMETER :: maxnx = 128,      & ! Maximum number of points in x-direction
                         maxny = 128,      & ! Maximum number of points in y-direction
                         maxnz = 128         ! Maximum number of points in z-direction
@@ -100,6 +102,9 @@ MODULE pars
                 umax,vmax,wmax, wabs, emax, vismax,                 &
                 cfl, tzero,                                         &
                 ucfl, vcfl, wcfl
+!
+!------------------------------------------------------------------------------!
+REAL ::         wave_height, R_hw, k_nonbreak
 !
 !------------------------------------------------------------------------------!
   CHARACTER*80  path_res, path_sav, path_his, path_prt,             &

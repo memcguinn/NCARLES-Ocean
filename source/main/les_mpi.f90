@@ -10,7 +10,6 @@ PROGRAM les_mpi
   USE con_data
   USE con_stats
   USE tracerbc, ONLY: applytracerbc
-  USE inputs
 !
   INCLUDE 'mpif.h'
 !
@@ -47,6 +46,7 @@ PROGRAM les_mpi
   IF (iti.EQ.0)  THEN
      igrdr = 2
      case = case_inp
+!     CALL inputs !!! CHECK
      CALL init
      CALL setup(it)
 !

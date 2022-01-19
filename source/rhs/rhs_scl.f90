@@ -123,9 +123,20 @@ SUBROUTINE rhs_scl(istep,iscl)
               Sc = 2073.1d0 - 125.62d0*tscal + 3.6276d0*tscal*tscal &
                      - 0.043219d0*tscal*tscal*tscal
 !
-!             CALCULATE PISTON VELOCITY (WANNINKHOF, 1992 - EQ. 3), HENRYS
-!             2.78e-6 DENOTES UNIT CONVERSION FACTOR OF CM/HR TO M/S
-              kconst = (2.77778d-6)*0.31d0*10.0*10.0*SQRT(660.0d0/Sc)
+              IF (flg_wavebreak .EQ. 0) THEN
+!               CALCULATE PISTON VELOCITY (WANNINKHOF, 1992 - EQ. 3), HENRYS
+!               2.78e-6 DENOTES UNIT CONVERSION FACTOR OF CM/HR TO M/S
+                kconst = (2.77778d-6)*0.31d0*10.0*10.0*SQRT(660.0d0/Sc)
+              ELSE
+                CALL sufto(utausv)
+                CALL tke_vis(istep)
+!
+                wave_height = 0.0246 * 10.0*10.0
+                R_hw = utausv * wave_height / tke_vis(istep)
+                k_nonbreak = 1.57d-4 * utausv * SQRT(660.0d0/Sc)
+                kconst = (2.77778d-6)*(k_nonbreak + 2.0d05*R_hw)
+!
+              END IF
 !
 !             CALCULATE SURFACE FLUX RATE
               flux_l(ix,iy) =0! (kconst)*(8.325-t(ix,iy,iscl,iz))

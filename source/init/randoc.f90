@@ -19,7 +19,7 @@ SUBROUTINE randoc
 ! --------------------------------------------------------------------------- !
 !
   zi  = z(izi)
-  tmixed = 288.15                       ! Mixed layer temperature, [K]
+  tmixed = 298.15                       ! Mixed layer temperature, [K]
 !
   DO iz=izs,ize
     IF (iz.le.izi) THEN
