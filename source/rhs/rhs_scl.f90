@@ -7,6 +7,7 @@
 !
 SUBROUTINE rhs_scl(istep,iscl)
 !
+    USE inputs, ONLY: u10_windspeed
     USE pars
     USE fields
     USE fftwk
@@ -126,20 +127,23 @@ SUBROUTINE rhs_scl(istep,iscl)
               IF (flg_wavebreak .EQ. 0) THEN
 !               CALCULATE PISTON VELOCITY (WANNINKHOF, 1992 - EQ. 3), HENRYS
 !               2.78e-6 DENOTES UNIT CONVERSION FACTOR OF CM/HR TO M/S
-                kconst = (2.77778d-6)*0.31d0*10.0*10.0*SQRT(660.0d0/Sc)
+                kconst = (2.77778d-6)*0.31d0*u10_windspeed*u10_windspeed*SQRT(660.0d0/Sc)
               ELSE
                 CALL sufto(utausv)
                 CALL tke_vis(istep)
 !
-                wave_height = 0.0246 * 10.0*10.0
+                wave_height = 0.0246 * u10_windspeed*u10_windspeed
                 R_hw = utausv * wave_height / tke_vis(istep)
                 k_nonbreak = 1.57d-4 * utausv * SQRT(660.0d0/Sc)
                 kconst = (2.77778d-6)*(k_nonbreak + 2.0d05*R_hw)
-!
               END IF
 !
-!             CALCULATE SURFACE FLUX RATE
-              flux_l(ix,iy) =0! (kconst)*(8.325-t(ix,iy,iscl,iz))
+              IF (flg_asflux .EQ. 0) THEN
+                flux_l(ix,iy) = 0
+              ELSE
+                flux_l(ix,iy) = (kconst)*(8.325-t(ix,iy,iscl,iz))
+              END IF
+!
             ELSE
               flux_l(ix,iy) = sgn*0.5*w(ix,iy,izm1)* &
                                      (t(ix,iy,iscl,izm1)+t(ix,iy,iscl,iz))

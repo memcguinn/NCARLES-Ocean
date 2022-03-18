@@ -19,10 +19,11 @@ jobn=ncarles
 pnum=UCUB0079
 rnam=testcase
 rtyp=regular
-tihh=2
-timm=0
+tihh=0
+timm=10
 nnds=1
 runo=logfile.out
+rund=CHECK
 
 
 ###############################################
@@ -45,7 +46,6 @@ module purge
 module load intel/17.0.1
 module load impi
 
-cd $rund
 mpirun ./lesmpi > $runo
 EXEC
 

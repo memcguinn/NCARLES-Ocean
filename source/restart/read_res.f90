@@ -6,6 +6,7 @@
 !
 SUBROUTINE read_res
 !
+    USE inputs, ONLY: iti
     USE pars
     USE fields
     USE con_data

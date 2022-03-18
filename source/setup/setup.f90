@@ -4,6 +4,7 @@
 !
 SUBROUTINE setup(it)
 !
+    USE inputs, ONLY: iti
     USE pars
     USE fields
     USE fftwk

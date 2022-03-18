@@ -4,10 +4,11 @@
 !
 SUBROUTINE speed2stress(u_10,v_10,cd_10,tau_x,tau_y)
 !
+USE inputs, ONLY: u10_stokes
 ! ---------------------------------------------------------------------------- !
 !
 ! WIND SPEED IN [5,10] m/s
-  u_10 = 12.5                                  ! Wind strength to change La_t
+  u_10 = u10_stokes                             ! Wind strength to change La_t
   v_10 = 0.0                                    ! Wind strength in v
   s_10 = SQRT(u_10**2 + v_10**2)                ! 10m wind speed
 !

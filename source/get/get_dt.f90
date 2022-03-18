@@ -6,6 +6,7 @@
 !
 SUBROUTINE get_dt(it,istart)
 !
+    USE inputs, ONLY: iti
     USE pars
     USE con_data
     USE con_stats
