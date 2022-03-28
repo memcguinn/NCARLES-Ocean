@@ -7,13 +7,12 @@
 SUBROUTINE set_paths
 !
     USE pars
-!
-!    namelist /restart_params/ path_res
+    USE inputs, ONLY: its_path
 !
 ! --------------------------------------------------------------------------- !
 !
 ! PATH AND FILE NAME OF VELOCITY RESTART FILE
-  path_res = './data/u.mp.30L00366'             ! Change file number to fit iti for restart
+  path_res = its_path            ! Change file number to fit iti for restart
 !
 ! SAVE PATH FOR 3D VOLUMES
   path_sav = './data'

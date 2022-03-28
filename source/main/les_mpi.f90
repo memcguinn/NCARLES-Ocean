@@ -5,6 +5,7 @@
 !
 PROGRAM les_mpi
 !
+  USE inputs, ONLY: iti, itn_restart
   USE pars
   USE fields
   USE con_data
@@ -30,7 +31,7 @@ PROGRAM les_mpi
   ts_mpi = mpi_wtime()
 !
   ncpu_s = 32
-  itn=0
+  itn = itn_restart
 !
   case_inp = '30L'
 !
@@ -46,7 +47,7 @@ PROGRAM les_mpi
   IF (iti.EQ.0)  THEN
      igrdr = 2
      case = case_inp
-!     CALL inputs !!! CHECK
+!    CALL inputs !!! CHECK
      CALL init
      CALL setup(it)
 !
@@ -100,6 +101,7 @@ PROGRAM les_mpi
 !
   IF (ivis .EQ. 1) THEN
      CALL iso(it)
+     CALL diurnal(it)
      CALL surfvis(it)
   END IF
 !

@@ -7,6 +7,7 @@
 !
 SUBROUTINE sufto(it)
 !
+    USE inputs, ONLY: u10_windspeed
     USE pars
     USE fields
     USE con_data
@@ -64,7 +65,7 @@ SUBROUTINE sufto(it)
   END IF
 !
 ! SURFACE WIND STRESS - tau = 0.0184n/m*m, rho = 1000kg/m^3)
-  utau = SQRT(rho_a*(8.5e-4)*10.0*10.0/rho_w)
+  utau = SQRT(rho_a*(8.5e-4)*u10_windspeed*u10_windspeed/rho_w)
   utausv = utau
   utau2  = utau*utau
 !

@@ -4,6 +4,7 @@
 !
 SUBROUTINE init
 !
+    USE inputs, ONLY: u10_windspeed, wtsfc_l1
     USE pars
     USE fields
     USE con_data
@@ -35,8 +36,13 @@ SUBROUTINE init
   fcor    = 2.0*pi2*SIN(rlat*d_to_r)/(24.0*3600.0)  ! Coriolis Parameter
   ugcont  = 0.0                     !
   vgcont  = 0.0                     !
-  wtsfc(1) = 0.0                    ! Define surface cooling
-  qstar(1) = wtsfc(1)               ! Heat flux (see wrsfc, surface cooling)
+  wtsfc(1) = wtsfc_l1               ! Define surface cooling
+!
+  IF (flg_diurnal .EQ. 0) THEN
+    qstar(1) = wtsfc(1)             ! Heat flux (see wtsfc, surface cooling)
+  ELSE
+    CALL diurnal
+  END IF
 !
   dtdzf(1)= 0.010
   dtjump  = 0.
@@ -132,7 +138,7 @@ SUBROUTINE init
   cdbtm  = vk*vk/zody/zody
 !
 ! SET SURFACE FRICTION VELOCITY, ALSO IN SURFTO
-  utau  = SQRT(rho_a*(8.5e-4)*10*10/rho_w)
+  utau  = SQRT(rho_a*(8.5e-4)*u10_windspeed*u10_windspeed/rho_w)
   utau2 = utau*utau
 !
   IF (ibuoy .EQ. 0 .OR. qstar(1) .EQ. 0.) THEN

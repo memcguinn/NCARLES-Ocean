@@ -6,25 +6,26 @@ MODULE pars
 !
   INTEGER, PARAMETER :: flg_stokes = 1      ! Stokes drift (0/1)
   INTEGER, PARAMETER :: flg_wavebreak = 0   ! Wave breaking (0/1)
-  INTEGER, PARAMETER :: flg_diurnal = 1     ! Diurnal forcing (0/1)
-  INTEGER, PARAMETER :: flg_reaction = 1    ! Carbonate chemistry reactions (0/1)
-  INTEGER, PARAMETER :: iti=0,            &
-                        itmax=5e4,        & ! Maximum number of iterations
+  INTEGER, PARAMETER :: flg_diurnal = 0     ! Diurnal forcing (0/1)
+  INTEGER, PARAMETER :: flg_reaction = 0    ! Carbonate chemistry reactions (0/1)
+  INTEGER, PARAMETER :: flg_asflux = 0      ! Air-sea flux (0/1)
+!
+  INTEGER, PARAMETER :: itmax=100000,     & ! Maximum number of iterations
                         imean=1,          & ! Time increment ???
                         ihst=1,           & ! Frequency of history files
-                        itape=1,          & ! Frequency for data outputs
+                        itape=500,        & ! Frequency for data outputs
                         itstr=1,          & ! Frequency of iterations
-                        it_his=99999,     & ! Iteration history (keep large, do not change for restart)
-                        i_viz=99999
+                        it_his=9e6,       & ! Iteration history (keep large, do not change for restart)
+                        i_viz=9e6
 !
-  INTEGER, PARAMETER :: nscl = 1,         & ! Number of scalars (1 iff flg_reaction = 0, 8 if else)
+  INTEGER, PARAMETER :: nscl = 8,         & ! Number of scalars (1 iff flg_reaction = 0, 8 if else)
                         nvar = (4+nscl)     ! Total number of variables
-  INTEGER, PARAMETER :: nxg1  = 64,      & ! Number of cells in x-direction
-                        nyg1  = 64,      & ! Number of cells in y-direction
-                        nzg1  = 64         ! Number of cells in z-direction
-  INTEGER, PARAMETER :: maxnx = 128,      & ! Maximum number of points in x-direction
-                        maxny = 128,      & ! Maximum number of points in y-direction
-                        maxnz = 128         ! Maximum number of points in z-direction
+  INTEGER, PARAMETER :: nxg1  = 64,       & ! Number of cells in x-direction
+                        nyg1  = 64,       & ! Number of cells in y-direction
+                        nzg1  = 64          ! Number of cells in z-direction
+  INTEGER, PARAMETER :: maxnx = 256,      & ! Maximum number of points in x-direction
+                        maxny = 256,      & ! Maximum number of points in y-direction
+                        maxnz = 256         ! Maximum number of points in z-direction
   INTEGER, PARAMETER :: maxnz1 = maxnz + 1, maxnz2 = maxnz + 2, &
                         maxnx2 = maxnx + 2, maxny2 = maxny + 2
 !
@@ -39,7 +40,7 @@ MODULE pars
                         idebug=0,         & ! Write debug file (0/1)
                         iz_space=0,       & ! Varied vertical spacing (0/1)
                         ivis0=1,          & ! THIS CAN PROB BE REMOVED
-                        ifix_dt=1,        & ! Fixed time step (0/1)
+                        ifix_dt=0,        & ! Fixed time step (0/1)
                         new_vis=-1,       & ! THIS CAN PROB BE REMOVED
                         i_dear = 0          ! Deardorff stability (0/1)
 !
@@ -53,7 +54,7 @@ MODULE pars
                 izs, ize, ixs, ixe, jxs, jxe, kxs, kxe,             &
                 mxs, mxe, iss, ise, iys, iye, jys, jye
 !
-  INTEGER ::    it_counter,itn
+  INTEGER ::    it_counter, itn
 !
 !------------------------------------------------------------------------------!
   CHARACTER case*3
@@ -104,7 +105,10 @@ MODULE pars
                 ucfl, vcfl, wcfl
 !
 !------------------------------------------------------------------------------!
-REAL ::         wave_height, R_hw, k_nonbreak
+  REAL ::       wave_height, R_hw, k_nonbreak,                      &
+                q0_cool, qd_heat, t_heat
+  REAL, DIMENSION(2) ::                                             &
+                cos_arr
 !
 !------------------------------------------------------------------------------!
   CHARACTER*80  path_res, path_sav, path_his, path_prt,             &

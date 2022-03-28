@@ -58,7 +58,7 @@ SUBROUTINE setcon
   etas(3)  = -1.0 + 2.0/3.0                   ! Full step at new time
   etas(4)  =  0.0
 !
-  cfl = 0.50                                  ! CFL = MAX(u) * dt/dx
+  cfl = 0.40                                  ! CFL = MAX(u) * dt/dx
 !
 RETURN
 END SUBROUTINE setcon
