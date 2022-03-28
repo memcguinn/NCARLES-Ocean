@@ -86,7 +86,9 @@ PROGRAM les_mpi
 !
 ! NEW EDDY VISCOSITY, BOUNDARY CONDITIONS
   IF (iss .EQ. 0 .AND. ifree .EQ. 0) THEN
-     CALL diurnal
+     IF (flg_diurnal .EQ. 1) THEN
+       CALL diurnal
+     END IF
      CALL lower(it)
   ELSEIF (ifree .EQ. 1) THEN
      CALL lower_free(it)
@@ -102,7 +104,9 @@ PROGRAM les_mpi
 !
   IF (ivis .EQ. 1) THEN
      CALL iso(it)
-     CALL diurnal
+     IF (flg_diurnal .EQ. 1) THEN
+       CALL diurnal
+     END IF
      CALL surfvis(it)
   END IF
 !
