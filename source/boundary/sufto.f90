@@ -12,7 +12,6 @@ SUBROUTINE sufto(it)
     USE fields
     USE con_data
     USE con_stats
-    USE diurnal
 !
     REAL buf(3+nscl)
 !

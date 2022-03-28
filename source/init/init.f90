@@ -36,9 +36,9 @@ SUBROUTINE init
   fcor    = 2.0*pi2*SIN(rlat*d_to_r)/(24.0*3600.0)  ! Coriolis Parameter
   ugcont  = 0.0                     !
   vgcont  = 0.0                     !
-  wtsfc(1) = wtsfc_l1               ! Define surface cooling
 !
   IF (flg_diurnal .EQ. 0) THEN
+    wtsfc(1) = wtsfc_l1             ! Define surface cooling
     qstar(1) = wtsfc(1)             ! Heat flux (see wtsfc, surface cooling)
   ELSE
     CALL diurnal

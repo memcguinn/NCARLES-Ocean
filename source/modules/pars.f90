@@ -6,7 +6,7 @@ MODULE pars
 !
   INTEGER, PARAMETER :: flg_stokes = 1      ! Stokes drift (0/1)
   INTEGER, PARAMETER :: flg_wavebreak = 0   ! Wave breaking (0/1)
-  INTEGER, PARAMETER :: flg_diurnal = 0     ! Diurnal forcing (0/1)
+  INTEGER, PARAMETER :: flg_diurnal = 1     ! Diurnal forcing (0/1)
   INTEGER, PARAMETER :: flg_reaction = 0    ! Carbonate chemistry reactions (0/1)
   INTEGER, PARAMETER :: flg_asflux = 0      ! Air-sea flux (0/1)
 !
@@ -90,7 +90,7 @@ MODULE pars
                 dzw_i(0:maxnz2), dzu_i(0:maxnz2)
 !
 !------------------------------------------------------------------------------!
-  REAL ::       t_factor, t_ref
+  REAL ::       t_factor, t_ref, t_di
 !
 !------------------------------------------------------------------------------!
   REAL ::       dfac(maxnz), dsl_z(0:maxnz1),                       &
