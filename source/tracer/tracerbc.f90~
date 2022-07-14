@@ -48,37 +48,37 @@ module tracerbc
       
       !! passive tracers 
       iscl = 2;
-      ictype(iscl) = 1;   val(iscl) = 7.56903;     tau(iscl)      = 1;
+      ictype(iscl) = 1;   val(iscl) = 7.56895e-06;     tau(iscl)      = 1;
       asflux(iscl) = 1;   airval(iscl) = 8.56056;
       np = nnz+2;  zt = 0;  rmodel(iscl) = 3;  bnd(:,iscl) = znptobnd(zt,np);
 
       iscl = 3;   
-      ictype(iscl) = 1;   val(iscl) = 1.67006e03;  tau(iscl)      = 1;
+      ictype(iscl) = 1;   val(iscl) = 1.67006e-03;  tau(iscl)      = 1;
       asflux(iscl) = 0;   airval(iscl) = 0;
       np = nnz+2;  zt = 0;  rmodel(iscl) = 3;  bnd(:,iscl) = znptobnd(zt,np);
 
       iscl = 4;   
-      ictype(iscl) = 1;   val(iscl) = 3.14655e02;  tau(iscl)      = 1;
+      ictype(iscl) = 1;   val(iscl) = 3.14658e-04;  tau(iscl)      = 1;
       asflux(iscl) = 0;   airval(iscl) = 0;
       np = nnz+2;  zt = 0;  rmodel(iscl) = 3;  bnd(:,iscl) = znptobnd(zt,np);
 
       iscl = 5;  
-      ictype(iscl) = 1;   val(iscl) = 2.96936e02;  tau(iscl)      = 1;
+      ictype(iscl) = 1;   val(iscl) = 2.96935e-04;  tau(iscl)      = 1;
       asflux(iscl) = 0;   airval(iscl) = 0;
       np = nnz+2;  zt = 0;  rmodel(iscl) = 3;  bnd(:,iscl) = znptobnd(zt,np);
 
       iscl = 6;
-      ictype(iscl) = 1;   val(iscl) = 1.18909e02;  tau(iscl)      = 1;
+      ictype(iscl) = 1;   val(iscl) = 1.18910e-04;  tau(iscl)      = 1;
       asflux(iscl) = 0;   airval(iscl) = 0;
       np = nnz+2;  zt = 0;  rmodel(iscl) = 3;  bnd(:,iscl) = znptobnd(zt,np);
 
       iscl = 7;  
-      ictype(iscl) = 1;   val(iscl) = 6.30928e-03; tau(iscl)      = 1;
+      ictype(iscl) = 1;   val(iscl) = 6.30922e-09; tau(iscl)      = 1;
       asflux(iscl) = 0;   airval(iscl) = 0;
       np = nnz+2;  zt = 0;  rmodel(iscl) = 3;  bnd(:,iscl) = znptobnd(zt,np);
 
       iscl = 8; 
-      ictype(iscl) = 1;   val(iscl) = 9.60492;     tau(iscl)      = 1;
+      ictype(iscl) = 1;   val(iscl) = 9.60501e-06;     tau(iscl)      = 1;
       asflux(iscl) = 0;   airval(iscl) = 0;
       np = nnz+2;  zt = 0;  rmodel(iscl) = 3;  bnd(:,iscl) = znptobnd(zt,np);
 
