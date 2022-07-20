@@ -35,7 +35,8 @@ c
          fcor_h  = 0.0
          ugcont  = 0.0
          vgcont  = 0.
-        wtsfc(1) = 5.0e-7
+        wtsfc(1) = 0
+c        5.0e-7
 c        wtsfc(1)=4.96e-07
 c         wtsfc(1)=1.190476e-06
 c         qstar(1)= 5.0e-07

@@ -1,0 +1,72 @@
+#! /bin/sh
+
+
+######################################################
+### Set case parameters
+### rund: Name of the run directory where data are placed
+### csrc: Directory containing code source
+
+rund=testruns/ncarles_v0l
+csrc=testruns/ncarles_v0l/code
+runo=logfile.out
+
+echo '--------------------------------------'
+echo ' Creating Directory and Copying Files '
+echo '--------------------------------------'
+
+#rm -rf $rund
+#mkdir $rund
+#mkdir $rund/code
+#mkdir $rund/data
+echo '---> Directory Made'
+
+#cp $csrc/boundary/* $rund/code/
+#cp $csrc/deriv/* $rund/code/
+#cp $csrc/diff/* $rund/code/
+#cp $csrc/fft/* $rund/code/
+#cp $csrc/get/* $rund/code/
+#cp $csrc/grid/* $rund/code/
+#cp $csrc/init/* $rund/code/
+#cp $csrc/main/* $rund/code/
+#cp $csrc/misc/* $rund/code/
+#cp $csrc/modules/* $rund/code/
+#cp $csrc/mpi/* $rund/code/
+#cp $csrc/restart/* $rund/code/
+#cp $csrc/rhs/* $rund/code/
+#cp $csrc/save/* $rund/code/
+#cp $csrc/setup/* $rund/code/
+#cp $csrc/solve/* $rund/code/
+#cp $csrc/stats/* $rund/code/
+#cp $csrc/stokes/* $rund/code/
+#cp $csrc/tracer/* $rund/code/
+#cp $csrc/trans/* $rund/code/
+echo '---> Code Base Copied'
+
+cd $rund/code
+
+
+echo '--------------------------------------'
+echo '           Compile Program            '
+echo '--------------------------------------'
+
+# PRE-COMPILE
+mpif90  -O3 -c pars.f fields.f fftwk.f con_data.f con_stats.f  tracerbc.f90 reaction.f90 -limf -lm
+# COMPILE CODE
+mpif90 -g3 -O3 -o lesmpi *.f *.f90 -limf -lm
+
+# COPY EXECUTABLE TO MAIN DIRECTORY
+cd ../
+cp code/lesmpi .
+
+# EXECUTE SCRIPT
+cat > EXEC_STEP << EXEC
+
+mpirun ./lesmpi > $runo
+EXEC
+
+
+echo '--------------------------------------'
+echo '           Start Simulation           '
+echo '--------------------------------------'
+
+time

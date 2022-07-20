@@ -13,11 +13,11 @@ c
 c      integer, parameter :: flg_strang = 1 ! strang splitting for reaction
       integer, parameter :: flg_stokes = 1 ! stokes on or off
       integer, parameter :: flg_reaction = 1 ! 3.1536e8 reaction model on or off
-      integer, parameter :: iti=0, itmax=18000, imean=1, ihst=01,
-     +            itape=30, itstr=1, it_his=99999, i_viz=99999
+      integer, parameter :: iti=0, itmax=20, imean=1, ihst=01,
+     +            itape=20, itstr=1, it_his=99999, i_viz=99999
 c
       integer, parameter :: nscl = 8, nvar = (4+nscl) !number of scalars and vars
-      integer, parameter :: nxg1  = 32, nyg1  = 32, nzg1  = 32 !size of problem
+      integer, parameter :: nxg1  = 64, nyg1  = 64, nzg1  = 64 !size of problem
       integer, parameter :: maxnx = 128, maxny = 128, maxnz = 128 !max size
 c     integer, parameter :: wid_x=0, wid_y=maxny/4 !max processors
       integer, parameter :: maxnz1 = maxnz + 1, maxnz2 = maxnz + 2,

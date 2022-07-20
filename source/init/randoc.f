@@ -14,6 +14,7 @@ c
      +     vyy(nnx,iys:iye,izs:izs)
       integer, allocatable:: seed(:)
       integer :: n,s
+      integer, parameter :: mem_seed = 1000
 c
       zi  = z(izi)
       tmixed = 298.15
@@ -59,8 +60,9 @@ c
          call random_seed(size=n)
          allocate(seed(n))
          call system_clock(s)
-         seed(:) = abs( mod((s*181)*((myid+1-83)*359), 104729) )
-         call random_seed(put=seed)                        
+         seed(:) = abs( mod((mem_seed*181)*((myid+1-83)*359), 104729) )
+c         seed(:) = abs( mod((s*181)*((myid+1-83)*359), 104729) )
+         call random_seed(put=seed)
 
 c
 c ------------- set initial random field to be
