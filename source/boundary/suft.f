@@ -94,13 +94,6 @@ c
          else
             zeta_mx = zeta_a
          endif
-c
-c ----------- iteration details
-c
-c        utau      = windm*vk/(zody-psim)
-c        write(nprt,1000) iter, zeta_a, utau, phim, psim
-c1000    format(' 1000 iter = ',i5,' zeta = ',e15.6,' u_* = ',e15.6,
-c    +          ' phim = ',e15.6,' psim = ',e15.6)
       enddo
 c
 c --------- check if neutral surface layer
@@ -123,7 +116,6 @@ c
             thstar(1) = (t1xy(1) - tsfcc(1))/dnom
             t10xy(1)  = thstar(1)*dnom
             qstar(1)  = wtsfc(1)
-c-utau*thstar(1)
          endif
          amonin = -utau**3/(batagk*qstar(1)) + 1E-10
          zeta   = z1/amonin
@@ -133,8 +125,6 @@ c-utau*thstar(1)
 c
 c ------- surface details, for debug
 c
-c     write(nprt,2000) windm, utau, qstar(1), tsfcc(1), amonin, zeta,
-c    +              z1, batag, vk, batagk, zo
  2000 format(' 2000 suft ',/,
      +       '    windm = ',e15.6,' utau = ',e15.6,' qstar = ',e15.6,/,
      +       '    tsfcc = ',e15.6,' MO L = ',e15.6,' z1/L = ',e15.6,/,
@@ -152,24 +142,6 @@ c
      +                 tsfcc(1),amonin,utau,it
          go to 9999
       endif
-c ---------- examples of two other scalars
-c
-c     c
-c     c **** get flux of b scalar, specified surface value
-c     c
-c           dnom      = (zody-psis)*vk74in
-c           thstar(2) = (t1xy(2)-tsfcc(2))/dnom
-c           qstar(2)  = -thstar(2)*utau
-c           t10xy(2)  = thstar(2)*dnom
-c           aut3m(2)  =  qstar(2)
-c
-c **** get surface value of c scalar, specified surface flux
-c
-c     dnom      = (zody-psis)*vk74in
-c     thstar(2) = -qstar(2)/utau
-c     tsfcc(2)  = t1xy(2) - dnom*thstar(2)
-c     t10xy(2)  = thstar(2)*dnom
-c     aut3m(2)  = qstar(2)
 c
       zol = zeta
       hol = zol*zi/z1

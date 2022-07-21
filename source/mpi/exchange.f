@@ -6,7 +6,6 @@ c               source nodes. Allows for 1z per cpu
 c
       use pars
       use fields
-c     use fftwk
       include 'mpif.h'
 c
       real fs(nnx,iys:iye,(4+nscl)),fr(nnx,iys:iye,(4+nscl))

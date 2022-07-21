@@ -44,22 +44,7 @@ c
 c     if(l_root) write(6,5600) (iz,z(iz),iz=0,nnz+1)
  5600 format(' 5600 in vgrid ',/,
      +       ' iz ',5x,' zw ',/,(i3,e15.6))
-c
-c     write(1,2000)
-c2000 format('#k ',/,
-c    +       '#lw 0.5 ',/,
-c    +       '#m 1',/,
-c    +       '#x 0 100 50',/,
-c    +       '#y -50 2100 500')
-c     x1 = 30.0
-c     x2 = 80.0
-c     do iz=0,nnz+1
-c        write(1,1000) x1,z(iz)
-c1000    format('#k ',/,
-c    +          (2e15.6))
-c        write(1,1100) x2,z(iz)
-c1100    format(2e15.6)
-c     enddo
+
 c
       return
       end

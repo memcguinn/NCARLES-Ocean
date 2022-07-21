@@ -24,15 +24,6 @@ c
       path_viz_yz = './data'
       path_stuf   = './data'
 c
-c -------------- typical habu names
-c
-c     path_res    = '/scr/pps/data/les/2dmpi/xxx/u.mp.xxx004'
-c     path_sav    = '/scr/pps/data/les/2dmpi/xxx'
-c     path_his    = '/scr/pps/data/les/2dmpi/xxx'
-c     path_viz_xy = '/scr/pps/data/les/2dmpi/xxx'
-c     path_viz_xz = '/scr/pps/data/les/2dmpi/xxx'
-c     path_viz_yz = '/scr/pps/data/les/2dmpi/xxx'
-c     path_stuf   = '/scr/pps/data/les/2dmpi/xxx'
 c
       return
       end

@@ -66,10 +66,7 @@ c
       if(it .eq. iti .and. iti .ne. 0) then
         dt_new = dt
       endif
-c	if(dt_new < 0.25) then
-c		print *, 'dt too small,dt=',dt_new
-c		stop
-c	endif
+
 
 c
       return

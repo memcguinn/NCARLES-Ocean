@@ -15,7 +15,6 @@ c ------------ note set nmatch in sr. iso so that
 c              it is compatible with conditions here
 c
       do iz=1,nnz
-c        ug(iz)   = ugcont*(zz(iz)/zl)
          ug(iz)   = ugcont
          vg(iz)   = vgcont
          divz(iz) = 0.0
@@ -168,25 +167,7 @@ c
 c
 c ------------ fix for baroclinic and subsidence effects !!
 c
-c     do iz=izs,ize
-c        ug(iz)=ugcont
-c        vg(iz)=vgcont
-c        if (.not.(ibrcl.eq.1)) go to 19988
-c        if (.not.(iz.le.izi)) go to 19987
-c        ug(iz)=0.
-c        vg(iz)=0.
-c 19987    continue
-c 19988    continue
-c        zz2=zz(iz)
-c        wls(iz)=-divgls*zz2
-c        if (.not.(iz.eq.1)) go to 19986
-c        do ix=1,nnx
-c        uls(ix)=divgls*(dx*float(ix-1)-xl*.5)
-c        enddo
-c     enddo
-c     write(nprt,9)(uls(ix),ix=1,nnx)
-c  9  format(1x,8e12.3)
-c 19986 continue
+
 c
       return
       end

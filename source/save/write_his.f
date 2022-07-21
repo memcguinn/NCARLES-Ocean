@@ -30,9 +30,7 @@ c
      +         u_10, v_10, cd_10, x_hurr, y_hurr,
      +         t_move, tau_x, tau_y, stokess, stokesw,
      +         cpou10, turb_la
-c    +         tps(mid,2), tps(mid,3),
-c    +         wtle(mid,2),wtsb(mid,2),wt_tot(mid,2),
-c    +         wtle(mid,3),wtsb(mid,3),wt_tot(mid,3)
+
  6000 format(5e17.8)
 c
 c -------------- write profile information

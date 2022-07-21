@@ -65,7 +65,6 @@ c
       if(iz .ne. nnz) then
          do iy=iys,iye
          do ix=1,nnx
-c           w(ix,iy,iz)  = w(ix,iy,iz)+dtgama*r3(ix,iy,iz)
             e(ix,iy,iz)  = e(ix,iy,iz)+dtgama*r5(ix,iy,iz)
          enddo
          enddo

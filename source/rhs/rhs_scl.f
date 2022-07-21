@@ -22,7 +22,6 @@ c      integer avalue_on = 0
 c
 c --------- set sign for ocean simulations that use monotone
 c
-c      sgn = 1.0
       sgn = -1.0   !!! check sgn
       upwn = 2.0
       if(iupwnd .ne. 1) upwn = 1.0
@@ -265,20 +264,6 @@ c
          enddo
          enddo
       enddo
-c
-c --------- reaction sources for for [izs:ize], for slow reactions (tau>1000)
-c           see SOLVE/STRANG.F for fast reaction sources
-c
-!      if((flg_reaction.eq.1).and.(iscl.ge.2)) then
-!        do iz=izs,ize
-!           do iy=iys,iye
-!              do ix=1,nnx
-!                 r4(ix,iy,iscl,iz) = r4(ix,iy,iscl,iz) +
-!     +                react_src(ix,iy,iscl,iz)
-!              enddo
-!           enddo
-!        enddo
-!      end if
 c
 c -------- save SGS fluxes for printout
 c

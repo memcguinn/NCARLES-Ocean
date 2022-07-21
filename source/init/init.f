@@ -34,11 +34,7 @@ c
          fcor_h  = 0.0
          ugcont  = 0.0
          vgcont  = 0.
-        wtsfc(1) = 0
-c        5.0e-7
-c        wtsfc(1)=4.96e-07
-c         wtsfc(1)=1.190476e-06
-c         qstar(1)= 5.0e-07
+        wtsfc(1) = 0.0 !       5.0e-7
          qstar(1) = wtsfc(1)
 c
 c ------- other thermodynamic variables for hurricane
@@ -59,8 +55,6 @@ c
      +           (1.0 + 0.00412*(t_surf-273.15))
          e_sat = 10.0**e_val
          e_rat = e_sat/p_surf
-c        r_sat = e_rat*0.62197/(1.0 - r_rat)
-c ERROR r_rat = e_rat
 c
          r_sat = e_rat*0.62197/(1.0 - e_rat)
          q_sat = r_sat/(1.0 + r_sat)
@@ -78,7 +72,6 @@ c
          if(l_root) write(6,7676) qw_tot_aw
  7676    format(' in init qw_tot_aw = ',e15.6)
 c
-c        dtdzf(1)=0.000
          dtdzf(1)=0.010
          dtjump  = 0.
          divgls  = 0.
@@ -128,8 +121,6 @@ c                 iz = 0,1,...,nnz+1; this allows indexing
 c                 to array elements z(0), etc.
 c
       zwstrt = 0.0
-c      xstrt  = 0.0
-c      ystrt  = 0.0
 c
 c ------------ if uniform vertical spacing then
 c
@@ -140,12 +131,7 @@ c
          do iz=0,nnz+1
             z(iz) = dz*float(iz) + zwstrt
          enddo
-c         do ix=0,nnx+1
-c            x(ix) = dx*float(ix) + xstrt
-c         enddo
-c         do iy=0,nny+1
-c            y(iy) = dy*float(iy) + ystrt
-c         enddo
+
       else
         call vgrid(zw1,zi,zl,nnz,z(0),l_root,l_debug)
       endif
@@ -194,13 +180,9 @@ c
         vk74in  = 1.0/vk
         zody74  = zody
       endif
-c     ugal   = 0.0
       ugal   = ugcont*0.5
-c     ugcont = ugcont - ugal
       cdbtm  = vk*vk/zody/zody
 c ----------- set surface friction velocity here and in sr. sufto
-c        utau = 4.29e-03
-c         utau = 6.3e-03
          utau = sqrt(rho_a*(8.5e-4)*5.75*5.75/rho_w)
 
       utau2    = utau*utau
@@ -214,9 +196,7 @@ c         utau = 6.3e-03
       uwsfc = -utau*utau
       vwsfc = -utau*utau
 c ------- make sure tsfcc is gt than t00 for both isfc=0 or 1
-c     tsfcc(1) = t00+qstar(1)/utau*zody*vk74in
       tsfcc(1) = 265.00
-c     tsfcc(2) = 1.0
 c
       if(l_root) then
          write(6,80)

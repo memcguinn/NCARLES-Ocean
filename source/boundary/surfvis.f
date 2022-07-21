@@ -18,13 +18,10 @@ c ----------- only root process(es) compute
 c
       if(iss .eq. 0) then
 
-c     ck = 0.1
-c     csmag = 0.18
-c     xkmax  = dzdz/dt/5.
       iz   = 1
       izm1 = iz - 1
       izp1 = iz + 1
-c     xkmax  = dzu(izp1)*dzu(izp1)/(5.0*dt)
+
       dz_i = dzu_i(izp1)
            call sufto(it)
       if(qstar(1) .eq. 0.) then
@@ -72,15 +69,7 @@ c     almin = 0.0001*dsl
 c
 c --------no stability corrected length scales when
 c         new eddy viscosity is on
-c
-c         stab=batag*(t(ix,iy,1,izp1)-t(ix,iy,1,iz))*dz_i
-c         if(stab.gt.stabmin) then
-c           als = stab_c*sqrt(e(ix,iy,iz)/stab)
-c           alwk(ix,iy) = amin1(dslk,als)
-c         endif
-c         alwk(ix,iy)=amax1(almin,alwk(ix,iy))
          xkvis(ix,iy)=ck*alwk(ix,iy)*sqrt(e(ix,iy,iz))*dfac(1)
-c        xkvis(ix,iy)=amin1(xkvis(ix,iy),xkmax)
       enddo
       enddo
 c

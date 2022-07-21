@@ -33,7 +33,7 @@ c
             call print(nprt,it,izs,ize)
           endif
       endif
-c     if(ifilt.eq.1)call filter
+
       if(l_root) then
          write(6,1) nnx,nny,nnz,ismlt,iti,itmax,
      +             iupwnd,ibuoy,itcut,
@@ -50,7 +50,6 @@ c
 c -------------- boundary condition flags
 c
       ibcu = iradup
-c     ibcu = 0
       ibcl = 0
 c
 c -------------------- wavenumbers, introduce a normalized
@@ -88,7 +87,6 @@ c
 c ----------- choose correct sign so gravity waves
 c             propagate out of the domain
 c
-c      sgn = 1.0
       sgn = -1.0
       if(ibcu.eq.1) then
          do iy=1,nny
@@ -135,9 +133,7 @@ c
             dsl_z(iz) = (abs(dx32*dy32*dzw(iz)))**(1./3.)
             if(dsl_z(iz) .gt. dsl_max) dsl_max = dsl_z(iz)
          enddo
-c        do iz=0,nnzp1
-c           dsl_z(iz) = dsl_max
-c        enddo
+
          dsl  = dsl_max
          dslg = dsl
       endif
@@ -155,11 +151,9 @@ c -------------------- set viscosity model parameters
         enddo
       endif
 c ------------------- set stokes velocity for atmos/oceanic flow
-c      if(ihurr .eq. 1) then
          call stokesv
-c      else
 c         call stokes_ideal
-c      endif
+
 c
 c --------- can add a time factor so as to skip into any part of
 c           the specified geostrophic arrays. time factor in seconds
@@ -168,18 +162,11 @@ c
 c
 c ---------- for print out to get more digits
 c
-c      t_ref = 299.15
 	t_ref = 290.16
 c
-c -------------------- specify cooling rate and initial
-c                      temperature even for restarts
-c
-c      c_rate   = 0.25/3600.0
-c      t_surf_i = 265.0
 c
 c -------------------- do not look for zi below zi_min
 c
-c      zi_min = 30.0
       zi_min = -5.0
       iz_min = 1
       do iz=1,nnz-1

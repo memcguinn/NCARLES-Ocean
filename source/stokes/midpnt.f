@@ -3,7 +3,6 @@ c
       integer it,j
 
 c
-c       write(6,1200) a,b,s,n
  1200 format(' 1200 a = ',e15.6,' b = ',e15.6,/,
      +       '      s = ',e15.6,' n = ',i5)
 C
@@ -11,7 +10,7 @@ C
          s = (b - a)*stokes_ker(0.5*(a+b))
       else
          it   = 3**(n-2)
-c         write(6,6000) n, it
+
  6000    format(' n = ',i4,' it = ',i4)
          tnm  = float(it)
          del  = (b - a)/(3.0*tnm)

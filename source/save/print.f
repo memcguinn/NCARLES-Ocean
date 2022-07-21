@@ -66,26 +66,6 @@ c
      +          '6-MEAN',10x
      +       ,/,(1x,i4,6(3x,e13.6)))
 
-c --------------- output additional scalars
-c
-c     if(nscl .eq. 2) then
-c     write(lu,5005)tsfcc(2),wtsfc(2)
-c5005 format(/,'  SURFACE VALUE: TXYM(2) =',e15.6,' WTSFC(2) = ',e15.6)
-c     write(lu,5100) (iz,txym(iz,2),wtle(iz,2),
-c    +              wtsb(iz,2),iz=iz_strt,iz_end)
-c5100 format(//,' IZ',5x,' SCALAR-1 MEAN',8x,' WS1LE',10x,
-c    +          ' WS1SB',10x
-c    +       ,/,(1x,i4,3(3x,e13.6)))
-c     else if (nscl .eq. 3) then
-c     write(lu,5205)tsfcc(2),wtsfc(2),tsfcc(3),wtsfc(3)
-c5205 format(/,'  SURFACE VALUE: TXYM(2) =',e15.6,' WTSFC(2) = ',e15.6,
-c    +       /,'  SURFACE VALUE: TXYM(3) =',e15.6,' WTSFC(3) = ',e15.6)
-c     write(lu,5200) (iz,txym(iz,2),txym(iz,3),wtle(iz,2),
-c    +    wtsb(iz,2),wtle(iz,3),wtsb(iz,3),iz=iz_strt,iz_end)
-c5200 format(//,' IZ',5x,' SCALAR-1 MEAN',8x,' SCALAR-2 MEAN',10x,
-c    +          ' WS1LE',10x,' WS1SB',10x,' WS2LE',10x,' WS1SB'
-c    +       ,/,(1x,i4,6(3x,e13.6)))
-c     endif
-c
+
       return
       end

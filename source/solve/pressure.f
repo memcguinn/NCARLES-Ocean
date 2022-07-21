@@ -79,7 +79,6 @@ c
       call mpi_sum_z(psum,i_root,myid,nnz,1)
 c
       do iz=izs,iz_ee
-c        psum(iz) = -psum(iz) + engz(iz) + c23*engsbz(iz)
          do iy=iys,iye
          do ix=1,nnx
             p(ix,iy,iz) = p(ix,iy,iz) - psum(iz)

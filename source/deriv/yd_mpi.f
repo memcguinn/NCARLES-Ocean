@@ -16,7 +16,6 @@ c
       call xtoy_trans(ay,ayt,nx,ny,ixs,ixe,ix_s,ix_e,
      +         iys,iye,iy_s,iy_e,iz1,iz2,myid,ncpu,np)
 c
-c     fn = 1.0/float(nny)
       do iz=iz1,iz2
          do ix=ixs,ixe
             call rfftf(ny,ayt(1,ix,iz),trigy)

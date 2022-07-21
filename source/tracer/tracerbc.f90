@@ -16,22 +16,22 @@ module tracerbc
 
 ! iscl      : scalar number (temperature is always iscl=1)
 ! tau       : reaction time scale
-! ictype    : initial condition (0 = nothing, 1 = horiz. band, 
+! ictype    : initial condition (0 = nothing, 1 = horiz. band,
 !                                2 = vertical band in x, 3 = vertical band in y,
-!                                4 = point source, 5 = vertical gradient, 
+!                                4 = point source, 5 = vertical gradient,
 !                                6 = horiz. gradient in x, 7 = horiz. gradient in y)
 !             ictype does not work for iscl=1 (temperature), that is set in init/randoc.f
 ! val       : value of initial finite or source band/point
 ! np        : width of initial finite or source band
 ! zt        : upper/left most level or finite or source band
-! bnd       : 
-! point     : 
+! bnd       :
+! point     :
 ! rmodel    : reaction model type (0 = no reaction, 1 = single tracer decay/growth,
 !                                  2 = two tracers decay/growth, 3 = carbonate chemistry)
 ! rdorg     : reaction decay or growth (0 = decaying tracer, 1 = growing tracer)
-! rpartner  : reaction partner (iscl number of coupled tracer for reaction, 
+! rpartner  : reaction partner (iscl number of coupled tracer for reaction,
 !                               0 = no coupled tracer)
-! asflux    : air-sea flux boundary condition (0 = for no flux, 1 = for flux [also need 
+! asflux    : air-sea flux boundary condition (0 = for no flux, 1 = for flux [also need
 !             flag_airseaflux.eq.1 in pars.f])
 ! airval    : value of tracer in air (only need set for use with asflux and flag_airseaflux)
 
@@ -42,27 +42,27 @@ module tracerbc
 
       !! active tracers (temperature)
       iscl = 1;
-      ictype(iscl) = 0;   val(iscl) = 298.15;      tau(iscl)    = 0;  
+      ictype(iscl) = 0;   val(iscl) = 298.15;      tau(iscl)    = 0;
       asflux(iscl) = 0;   airval(iscl) = 0;
       np = 0;      zt = 0;  rmodel(iscl) = 0;  bnd(:,iscl) = znptobnd(zt,np);
-      
-      !! passive tracers 
+
+      !! passive tracers
       iscl = 2;
       ictype(iscl) = 1;   val(iscl) = 7.56903;     tau(iscl)      = 1;
       asflux(iscl) = 1;   airval(iscl) = 8.56056;
       np = nnz+2;  zt = 0;  rmodel(iscl) = 3;  bnd(:,iscl) = znptobnd(zt,np);
 
-      iscl = 3;   
+      iscl = 3;
       ictype(iscl) = 1;   val(iscl) = 1.67006e03;  tau(iscl)      = 1;
       asflux(iscl) = 0;   airval(iscl) = 0;
       np = nnz+2;  zt = 0;  rmodel(iscl) = 3;  bnd(:,iscl) = znptobnd(zt,np);
 
-      iscl = 4;   
+      iscl = 4;
       ictype(iscl) = 1;   val(iscl) = 3.14655e02;  tau(iscl)      = 1;
       asflux(iscl) = 0;   airval(iscl) = 0;
       np = nnz+2;  zt = 0;  rmodel(iscl) = 3;  bnd(:,iscl) = znptobnd(zt,np);
 
-      iscl = 5;  
+      iscl = 5;
       ictype(iscl) = 1;   val(iscl) = 2.96936e02;  tau(iscl)      = 1;
       asflux(iscl) = 0;   airval(iscl) = 0;
       np = nnz+2;  zt = 0;  rmodel(iscl) = 3;  bnd(:,iscl) = znptobnd(zt,np);
@@ -72,12 +72,12 @@ module tracerbc
       asflux(iscl) = 0;   airval(iscl) = 0;
       np = nnz+2;  zt = 0;  rmodel(iscl) = 3;  bnd(:,iscl) = znptobnd(zt,np);
 
-      iscl = 7;  
+      iscl = 7;
       ictype(iscl) = 1;   val(iscl) = 6.30928e-03; tau(iscl)      = 1;
       asflux(iscl) = 0;   airval(iscl) = 0;
       np = nnz+2;  zt = 0;  rmodel(iscl) = 3;  bnd(:,iscl) = znptobnd(zt,np);
 
-      iscl = 8; 
+      iscl = 8;
       ictype(iscl) = 1;   val(iscl) = 9.60492;     tau(iscl)      = 1;
       asflux(iscl) = 0;   airval(iscl) = 0;
       np = nnz+2;  zt = 0;  rmodel(iscl) = 3;  bnd(:,iscl) = znptobnd(zt,np);
@@ -86,16 +86,11 @@ module tracerbc
          bnds=bnd(:,iscl); vals=val(iscl); points=point(:,iscl);
          if (it.eq.1) then
             if (ictype(iscl).eq.1) call hbndsource(iscl,bnds,vals);
-            !if (ictype(iscl).eq.2) call vxbndsource(iscl,bnds,vals);
-            !if (ictype(iscl).eq.3) call vybndsource(iscl,bnds,vals);
             if (ictype(iscl).eq.5) call vgradsource(iscl,bnds,vals);
-            !if (ictype(iscl).eq.6) call hxgradsource(iscl,bnds,vals);
-            !if (ictype(iscl).eq.7) call hygradsource(iscl,bnds,vals);
          endif
-         !if (ictype(iscl).eq.4) call pointsource(iscl,points,vals); 
          bnds = 0; vals = 0; points = 0;
       enddo
-      
+
       if(flg_debug == 1) then
           open(13, file='tracerbc.txt',access='append')
           write(13,'(A)') '------------------------'
@@ -124,38 +119,6 @@ module tracerbc
 
     end subroutine
 
-!!$    subroutine vxbndsource(iscl, bnds, vals)
-!!$      integer, intent(in) :: iscl
-!!$      integer, intent(in), dimension(2) :: bnds
-!!$      integer, intent(in) :: vals
-!!$      integer :: ix,iy,iz
-!!$      do iy=iys,iye
-!!$         do iz=izs,ize
-!!$            do ix=bnds(1),bnds(2)
-!!$               t(ix,iy,iscl,iz) = vals
-!!$            end do
-!!$         end do
-!!$      end do
-!!$
-!!$    end subroutine
-
-!!$    subroutine vybndsource(iscl, bnds, vals)
-!!$      integer, intent(in) :: iscl
-!!$      integer, intent(in), dimension(2) :: bnds
-!!$      integer, intent(in) :: vals
-!!$      integer :: ix,iy,iz
-!!$      do iy=bnds(1),bnds(2)
-!!$         do iz=izs,ize
-!!$            do ix=1,nnx
-!!$               if ((iy >= iys) .and. (iy <= iye)) then
-!!$                     t(ix,iy,iscl,iz) = vals
-!!$               endif
-!!$            end do
-!!$         end do
-!!$      end do
-!!$
-!!$    end subroutine
-
     subroutine vgradsource(iscl, bnds, vals)
       integer, intent(in) :: iscl
       integer, intent(in), dimension(2) :: bnds
@@ -174,59 +137,6 @@ module tracerbc
       end do
 
     end subroutine
-
-!!$    subroutine hxgradsource(iscl, bnds, vals)
-!!$      integer, intent(in) :: iscl
-!!$      integer, intent(in), dimension(2) :: bnds
-!!$      integer, intent(in) :: vals
-!!$      integer :: ix,iy,iz,xi
-!!$
-!!$      xi=dx*real(bnds(2))
-!!$      do iy=iys,iye
-!!$         do iz=izs,ize
-!!$            do ix=bnds(1),bnds(2)
-!!$               t(ix,iy,iscl,iz) = (vals/xi)*(xi-dx*real(ix))
-!!$            end do
-!!$         end do
-!!$      end do
-!!$
-!!$    end subroutine
-
-!!$    subroutine hygradsource(iscl, bnds, vals)
-!!$      integer, intent(in) :: iscl
-!!$      integer, intent(in), dimension(2) :: bnds
-!!$      integer, intent(in) :: vals
-!!$      integer :: ix,iy,iz,yi
-!!$
-!!$      yi=dy*real(bnds(2))
-!!$      do iy=bnds(1),bnds(2)
-!!$         do iz=izs,ize
-!!$            do ix=1,nnx
-!!$               if ((iy >= iys) .and. (iy <= iye)) then
-!!$                  t(ix,iy,iscl,iz) = (vals/yi)*(yi-dy*real(iy))
-!!$               endif
-!!$            end do
-!!$         end do
-!!$      end do
-!!$
-!!$    end subroutine
-!!$
-!!$    subroutine pointsource(iscl, points, vals)
-!!$      integer, intent(in) :: iscl
-!!$      integer, intent(in), dimension(3) :: points
-!!$      integer, intent(in) :: vals
-!!$      integer :: ix,iy,iz
-!!$      do iy=points(2),points(2) + 2
-!!$         do iz=points(3),points(3) + 2
-!!$            do ix=points(1),points(1) + 2
-!!$               if ((iz >= izs).and.(iz <= ize) .and. (iy >= iys).and.(iy <= iye)) then
-!!$                  t(ix,iy,iscl,iz) = vals
-!!$               endif
-!!$            end do
-!!$         end do
-!!$      end do
-!!$
-!!$    end subroutine
 
     function znptobnd(zt,np)
       integer, intent(in) :: zt
@@ -252,14 +162,14 @@ module tracerbc
       integer, dimension(2) :: xnptobnd
       integer :: ix
 
-      ! set the first bound, and make sure it doesn't exceed dimensions   
+      ! set the first bound, and make sure it doesn't exceed dimensions
       ix = xtoix(xt)
       xnptobnd(1) = ix - int((np-1)/2)
       if (xnptobnd(1) < 0) then
         xnptobnd(1) = 0
       end if
 
-      ! set the second bound based upon the first                         
+      ! set the second bound based upon the first
       xnptobnd(2) = xnptobnd(1) + np -1
 
     end function
@@ -270,14 +180,14 @@ module tracerbc
       integer, dimension(2) :: ynptobnd
       integer :: iy
 
-      ! set the first bound, and make sure it doesn't exceed dimensions   
+      ! set the first bound, and make sure it doesn't exceed dimensions
       iy = ytoiy(yt)
       ynptobnd(1) = iy - int((np-1)/2)
       if (ynptobnd(1) < 0) then
         ynptobnd(1) = 0
       end if
 
-      ! set the second bound based upon the first                         
+      ! set the second bound based upon the first
       ynptobnd(2) = ynptobnd(1) + np -1
 
     end function
@@ -306,12 +216,12 @@ module tracerbc
       ztoiz = int(zt/dz)
 
     end function
-    
+
     function xtoix(xt)
       integer, intent(in) :: xt
       integer :: xtoix
 
-      ! note that this will only work for equispaced z grids              
+      ! note that this will only work for equispaced z grids
       xtoix = int(xt/dx)
 
     end function
@@ -320,10 +230,9 @@ module tracerbc
       integer, intent(in) :: yt
       integer :: ytoiy
 
-      ! note that this will only work for equispaced z grids              
+      ! note that this will only work for equispaced z grids
       ytoiy = int(yt/dy)
 
     end function
 
 end module
-

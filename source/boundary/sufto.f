@@ -55,18 +55,10 @@ c
       if(isfc .eq. 0 ) then
          tsfcc(1)=t1xy(1)-t10xy(1)
       endif
-c     vsfc=sqrt(u1xy*u1xy+v1xy*v1xy)
-c     if(windm.le.0.01)windm=0.01
-c     if(vsfc .le.0.01)vsfc =0.01
 c
 c ----------- input surface wind stress (tau = 0.0184n/m*m)
 c             density rho = 1000kg/m^3
-c
-c     utau = 4.29e-03
-c     utau = 6.10e-03
-c      utau = 7.00e-03
-c     tau_w = rho_a*cd_w*u_10*u_10
-c     utau_w = sqrt(tau_w/rho_w)
+
       utau = sqrt(rho_a*(8.5e-4)*5.75*5.75/rho_w)
 c
 c **** save old utau
@@ -112,34 +104,11 @@ c
 c
 c ---------- examples of two other scalars
 c
-c     c
-c     c **** get flux of b scalar, specified surface value
-c     c
-c           dnom      = (zody-psis)*vk74in
-c           thstar(2) = (t1xy(2)-tsfcc(2))/dnom
-c           qstar(2)  = -thstar(2)*utau
-c           t10xy(2)  = thstar(2)*dnom
-c           aut3m(2)  =  qstar(2)
-c     c
-c     c **** get surface value of c scalar, specified surface flux
-c     c
-c           dnom      = (zody-psis)*vk74in
-c           thstar(3) = -qstar(3)/utau
-c           tsfcc(3)  = t1xy(3) - dnom*thstar(3)
-c           t10xy(3)  = thstar(3)*dnom
-c           aut3m(3)  = qstar(3)
-c
 c **** note roundoff problem in angles are close to multiples of pi
-c     tep=u1xy/vsfc
-c     if(tep.gt.1.)tep=1.
-c     if(tep.lt.-1.)tep=-1.
-c     thta=acos(tep)
       utau2 = utau*utau
-c     au13m = -utau2*cos(thta)
-c     au23m = -utau2*sin(thta)*sign(1.,v1xy)
       au13m = utau2
       au23m = 0.0
-      aut3m(1)= wtsfc(1)!qstar(1)
+      aut3m(1)= wtsfc(1)
 c
       return
 c

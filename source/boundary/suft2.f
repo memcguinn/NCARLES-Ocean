@@ -17,19 +17,6 @@ c
       zeta_mn = -6.0
       zeta_mn_i = 1.0/zeta_mn
       iz   = 1
-c     izm1 = iz - 1
-c     izp1 = iz + 1
-c
-c      write(nprt,3131) myid, utau, zody, vk74in, batagk,
-c    +               u_level1(jxs,1,3), u_level1(jxe,1,3),
-c    +               u_level1(jxs,1,1), u_level1(jxe,1,1),
-c    +               u_level1(jxs,1,2), u_level1(jxe,1,2)
-c3131  format(' in suft2 myid = ',i4,/,
-c    +        ' utau = ',e15.6,' zody = ',e15.6,/,
-c    +        ' vk74in = ',e15.6,' batagk = ',e15.6,/,
-c    +        ' t(jxs) = ',e15.6,' t(jxe) = ',e15.6,/,
-c    +        ' u(jxs) = ',e15.6,' u(jxe) = ',e15.6,/,
-c    +        ' v(jxs) = ',e15.6,' v(jxe) = ',e15.6)
 c
       do iy=iys,iye
       do ix=mxs,mxe
@@ -74,9 +61,7 @@ c
       amonold  = amonin
       amonin   = utau*utau/(batagk*thstar(1))
       diff     = abs(amonin - amonold)
-c      write(nprt,5656)iter,psim,utau,zeta,amonin,dmonin,diff
-c 5656 format(' iter=',i4,' phm=',e10.3,' utau=',e10.3,
-c     1      ' zeta=',e10.3,' l=',e10.3,' diff = ',e12.4)
+c
       iter = iter+1
       if(iter.gt.10)go to 1000
       if(diff.gt.abs(tol*amonin)) go to 100
@@ -99,22 +84,10 @@ c
       if(tep.lt.-1.) tep = -1.0
       thta  = acos(tep)
       utau2 = utau*utau
-c     au13m=-utau2*cos(thta)
-c     au23m=-utau2*sin(thta)*sign(1.,u_level1(ix,iy,2))
-c     aut3m(1)= qstar(1)
 c
       tau13m(ix,iy)   = -utau2*cos(thta)
       tau23m(ix,iy)   = -utau2*sin(thta)*sign(1.,u_level1(ix,iy,2))
       taut3m(ix,iy,1) = qstar(1)
-c
-c **** get surface value of c scalar, specified surface flux
-c
-c     dnom      = (zody-psis)*vk74in
-c     thstar(2) = -qstar(2)/utau
-c     tsfcc(2)  = u_level1(ix,iy,4) - dnom*thstar(2)
-c     t_grnd(ix,iy,2)  = u_level1(ix,iy,4) - dnom*thstar(2)
-c     t10xy(2)  = thstar(2)*dnom
-c     taut3m(ix,iy,2)  = qstar(2)
 c
 c
 c ------- end of x-y loops

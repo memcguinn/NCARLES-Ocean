@@ -50,10 +50,8 @@ c
 c
 
          dir_x = 1.0
-csqrt(3.0)/2.0
-c u_10/sqrt(u_10**2+v_10**2)
 	 dir_y = 0.0
-c v_10/sqrt(u_10**2+v_10**2)
+
 
       return
  2212 format('#k ',/,

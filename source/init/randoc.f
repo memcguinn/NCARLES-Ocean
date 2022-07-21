@@ -76,7 +76,6 @@ c ----------- ampv and ampt are max amplitudes of random
 c             velocity and temperature fields
 c
          ampv = 0.01
-c        ampt = 0.00
          ampt = 0.01
 c
 c ------- simple random field scaled between 0 and 1

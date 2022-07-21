@@ -37,15 +37,9 @@ c
          do l=1,nscl
          do iy=iys,iye
          do ix=1,nnx
-c            if((dtzeta*r4(ix,iy,l,iz).lt.0.0).and.
-c     +           (abs(dtzeta*r4(ix,iy,l,iz)) .lt. t(ix,iy,l,iz)))then
-c               trhs(ix,iy,l,iz) = t(ix,iy,l,iz)
-c            else
+
                trhs(ix,iy,l,iz) = t(ix,iy,l,iz) + dtzeta*r4(ix,iy,l,iz)
-c            endif
-c            if(ix.eq.10 .and. iy.eq.10 .and. iz.eq.2)then 
-c               write(*,*) '1st: ', trhs(ix,iy,l,iz)
-c            endif
+
          enddo
          enddo
          enddo
@@ -56,22 +50,14 @@ c           at next step
 c
       call tke_vis(istep)
       call rhs_uvw(istep)
-c      if(ix.eq.10 .and. iy.eq.10 .and. iz.eq.2)then
-c         write(*,*) '2nd: ', trhs(ix,iy,l,iz)
-c      endif
-c
+
 c -------- evaluate rhs of scalar equations
 
 c
-c      if(it > 200) then
       do l=1,nscl
          call rhs_scl(istep,l,it)
       enddo
-c      if(ix.eq.10 .and. iy.eq.10 .and. iz.eq.2)then
-c         write(*,*) '3rd: ', trhs(ix,iy,l,iz)
-c      endif
-c      endif
-c
+
 c ---------- gather stat sums on root processor
 c            using mpi_reduction over all processors
 c
@@ -142,9 +128,7 @@ c
          do l=1,nscl
          do iy=iys,iye
          do ix=1,nnx
-c            if(ix.eq.10 .and. iy.eq.10 .and. iz.eq.2)then
-c               write(*,*) '4th: ', trhs(ix,iy,l,iz)
-c            endif
+
             t(ix,iy,l,iz) = trhs(ix,iy,l,iz)
          enddo
          enddo

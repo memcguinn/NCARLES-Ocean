@@ -60,7 +60,6 @@ c
              trun(iz) = trun(iz-1)*weight + (1.0-weight)*txym(iz,1)
          enddo
          itop = 1
-c         tcrit = 0.25
          tcrit = 0.1
          do iz=2,nnz
                 if(txym(iz,1) .gt. (trun(iz) + tcrit)) then
@@ -81,16 +80,7 @@ c ----------- use gradient method, every process computes
 c
       elseif(method .eq. 3) then
 c
-c ---------------- get local zi from gradient in temperaure field
-c
-c     dz_i = dzu_i(izs+1)
-c     do iy=1,nny
-c     do ix=1,nnx
-c        gradloc(1,ix,iy) = (t(ix,iy,1,izs+1) - t(ix,iy,1,izs))*dz_i
-c        gradloc(2,ix,iy) = z(izs)
-c     enddo
-c     enddo
-c
+
 c ------- similar to zeroing the stat array in sr. mean_stat
 c
       do iy=1,nny
@@ -117,8 +107,7 @@ c
       enddo
       endif
 c
-c     call mpi_reduce(gradloc,gradmax,2*nnx*nny,mpi_real8,ziloc,
-c    +                i_root,mpi_comm_world,ierror)
+
 c
 c ----------- alternate version using already defined function in mpi
 c             passes 2 real8 variables
@@ -136,7 +125,6 @@ c
          enddo
          enddo
          zi = zi_avg*fnxy
-c        itop = nint(zi/dz)
       endif
 c
       endif
@@ -151,7 +139,6 @@ c
      +         zi .gt. z(iz+1)) itop = iz
          enddo
 c
-c     if(l_root) write(6,7001) myid,zi,itop
  7001 format(' 7001 in pbltop myid = ',i4,' zi = ',e15.6,
      +       ' itop = ',i3)
 c

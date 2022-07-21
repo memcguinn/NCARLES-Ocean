@@ -15,8 +15,6 @@ c
       call fill_ch
       call fill_cs
 c
-c      write(6,5001) isize
-c 5001 format(' size of stats array = ',i8)
 c
 c ---------------- debug for arrays
 c
@@ -27,8 +25,6 @@ c
       nnx = nxg1
       nny = nyg1
       nnz = nzg1
-c     izs = 1
-c     ize = nnz
 c
 c
 c ----------- make sure problem and cpu's match

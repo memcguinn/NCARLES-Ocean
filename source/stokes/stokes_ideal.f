@@ -11,11 +11,8 @@ c
 c
 c ----------- compute stokes velocity for ocean pbls
 c
-c        stokesw = pi2/20.0
          stokesw = pi2/76.5
-c        ak      = 0.04
          ak      = 0.00
-c        stokesa = 1.0
          stokesa = ak/stokesw
          sigma = sqrt(abs(grav)*stokesw)
          stokess = sigma*stokesw*stokesa**2

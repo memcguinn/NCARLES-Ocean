@@ -9,7 +9,6 @@ c
 c
 c -------- fancy drag rule with limited cd
 c
-c     cd_fac = 1.1
       cd_fac = 0.7
       arg1   = (s_10 - 25.0)/5.0
       arg2   = -25.0/5.0

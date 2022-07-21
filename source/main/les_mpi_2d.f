@@ -88,13 +88,11 @@ c
          igrdr = 2
          case = case_inp
          call init
-c         call init_hurr
          call setup(it)
 c
 c ---------- choose routine for getting initial guess
 c
             call randoc
-c           call get_fields
          call get_max
       else
          igrdr = 3
@@ -111,9 +109,6 @@ c
       call set_sav(it,iti)
 c
 c ------- update position of vortex
-c
-c      call hurr_move
-c      call stokesv
 c
       if(it .ge. new_vis .and. ivis0 .eq. 1) then
           ivis = 1
@@ -157,31 +152,12 @@ c
         call pbltop(itop)
       endif
 c
-c ------------ save velocity field
-c
-c      if(msave .and. istage .eq. 1) then
-c         call save_v(it)
-c      endif
-
-c      if(msave_v .and. istage .eq. 1) then
-c         call save_viz(it)
-c      endif
-c
-c ------------ save pressure field
-c
-c      if(msave .and. istage .eq. 1) then
-c         call save_p
-c      endif
-c
 c --------- get rhs for all equations
 c
       if(istage.eq.1 .and. flg_reaction.eq.1)then
          call strang1(it)
       endif
       call comp1(istage,it)
-c      if(istage .eq. 1) then
-c         if(msave .and. l_root) call save_c(it)
-c      endif
 c
 c --------- solve for pressure
 c

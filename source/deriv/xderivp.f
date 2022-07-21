@@ -8,7 +8,6 @@ c          assumes that wavenumbers are normalized by number of points
 c
       real xk(nnx), trigx(2*nnx+15), ax(nnx,iys:iye)
 c
-c     fn = 1.0/float(nnx)
       do iy=iys,iye
          call rfftf(nnx,ax(1,iy),trigx)
          ii = 1

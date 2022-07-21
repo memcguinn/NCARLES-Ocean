@@ -47,10 +47,6 @@ c
         e_temp   = amax1(e_xy,e_temp)
         vis_temp = amax1(vis_xy,vis_temp)
 c
-c       if(iz .le. 15) then
-c         write(6,6000) iz, wmax
-c6000     format(' in get_dt iz = ',i3,' wmax = ',e15.6)
-c       endif
 c
       enddo
       u_send(1) = u_temp

@@ -22,12 +22,6 @@ c
 c
 c --------- boundary conditions are gradient conditions
 c
-c            dudzbc = 0.0
-c            dvdzbc = 0.0
-c            dtdzbc = dtdzf
-c            wbc    = 0.0
-c            ebc    = 0.0
-c
         do iy=iys,iye
         do ix=1,nnx
            wbc(ix,iy,1) = 0.0
@@ -127,10 +121,6 @@ c
          uy(ix,iy,izp1) = 0.0
          vx(ix,iy,izp1) = 0.0
          vy(ix,iy,izp1) = 0.0
-c        ux(ix,iy,izp1) = ubc(ix,iy,1)
-c        uy(ix,iy,izp1) = ubc(ix,iy,1)
-c        vx(ix,iy,izp1) = vbc(ix,iy,1)
-c        vy(ix,iy,izp1) = vbc(ix,iy,1)
       enddo
       enddo
       do iscl=1,nscl

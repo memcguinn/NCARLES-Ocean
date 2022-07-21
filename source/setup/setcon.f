@@ -74,7 +74,6 @@ c ----------- a full step, at the new time
 c
       etas(4)  =  0.0
 c
-c     cfl = 0.63
       cfl = 0.50
 c
       return

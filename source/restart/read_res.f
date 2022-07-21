@@ -7,9 +7,7 @@ c
       use fields
       use con_data
       use con_stats
-c #if defined(SWAP)
-c       use module_byteswap
-c #endif
+
       include 'mpif.h'
 c
       integer status(mpi_status_size), ierr
@@ -41,9 +39,7 @@ c
          call mpi_file_read_at_all(nvel,offset,temp,n_read,
      +                              mpi_real8,status,ierr)
          if (ierr /= 0) goto 9992
-c #if defined(SWAP)
-c          call byteswap(temp)
-c #endif
+
          do j=iys,iye
          do i=1,nnx
             u(i,j,k) = temp(1,i,j)
@@ -103,7 +99,7 @@ c       wtsfcs = 0.000
 c
 c
 c ------   reset qstar and wtsfc for no heat flux
-c              qstar(1) = qstars
+c              qstar(1) = qstars    !!! add no heat fllux flag
 c              wtsfc(1) = wtsfcs
 c              qstar(2) = qstars
 c              wtsfc(2) = wtsfcs
@@ -116,14 +112,7 @@ c
       call get_dz
 c
       return
-c ------------------------  process errors from read
-c9991 continue
-c     write(6,6000) nvel,iz
-c6000 format(' SR. READ_RES: hit end of file on unit number = ',i2,/,
-c    +       '               at iz = ',i4)
-c     call mpi_finalize(ierr)
-c     stop
-c ---------------------
+
  9992 continue
       write(6,6100) nvel,iz
  6100 format(' SR. READ_RES: error reading file on unit number = ',i2,/,

@@ -5,7 +5,6 @@ c             for the donelan spectral shape
 c             the latter is converted into "sigma" space
 c             careful with 2*pi factors
 c
-c      include 'par.f'
 c
       use pars
       use fields
