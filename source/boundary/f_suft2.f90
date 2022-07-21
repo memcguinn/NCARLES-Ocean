@@ -4,7 +4,7 @@ SUBROUTINE f_suft2(rbuf,nnx,mxs,mxe,iys,iye,nscl,tau13m,tau23m,taut3m,t_grnd)
 
   ! FILL SURFACE ARRAYS ON ROOT PROCESSORS
   INTEGER :: iscl , ix , iy , iye , iys , mxe , mxs , nnx , nscl
-  
+
   REAL :: rbuf(2+2*nscl,mxs:mxe,iys:iye)
   REAL ::                                                                   &
           tau13m(nnx,iys:iye), tau23m(nnx,iys:iye),                         &
