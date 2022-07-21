@@ -60,7 +60,7 @@ MODULE con_stats
 ! POINTER ASSOCIATION FOR STAT ARRAYS
 ! GET SIZE OF STAT ARRAYS ISIZE FOR HISTORY FILES
 
-    INTEGER, PARAMETER :: isize = 0
+    isize = 0
 
     wwsb    => c_s%wwsb     ; isize = isize + size(wwsb)
     engz    => c_s%engz     ; isize = isize + size(engz)
