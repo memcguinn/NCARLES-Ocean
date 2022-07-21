@@ -5,6 +5,7 @@ SUBROUTINE bcast_pbc
   USE fields
 
   INCLUDE 'mpif.h'
+
   INTEGER :: istatus(mpi_status_size)
   INTEGER :: irow_r
 
