@@ -25,11 +25,7 @@ c
       enddo
 c
       if(iocean .eq. 1) then
-         if(ihurr .eq. 1) then
-           call suft_hurr(it)
-         else
-           call sufto(it)
-         endif
+        call sufto(it)
          do iy=iys,iye
          do ix=1,nnx
             tau13m(ix,iy) = -au13m

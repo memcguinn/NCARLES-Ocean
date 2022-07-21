@@ -27,11 +27,7 @@ c     xkmax  = dzdz/dt/5.
 c     xkmax  = dzu(izp1)*dzu(izp1)/(5.0*dt)
       dz_i = dzu_i(izp1)
       if(iocean .eq. 1) then
-         if(ihurr .eq. 1) then
-           call suft_hurr(it)
-         else
            call sufto(it)
-	endif
       else
          call suft(it)
       endif
