@@ -28,7 +28,6 @@ c
       if(method .le. 2 .and. l_root) then
 c
       sgn = 1.0
-      if(iocean .eq. 1) sgn = 1.0
       if (method .le. 0 .or. method .gt. 2) then
          itop=1
          wttot=wtle(1,1)+wtsb(1,1)
@@ -61,8 +60,8 @@ c
              trun(iz) = trun(iz-1)*weight + (1.0-weight)*txym(iz,1)
          enddo
          itop = 1
-         tcrit = 0.25
-         if(iocean .eq. 1) tcrit = 0.1
+c         tcrit = 0.25
+         tcrit = 0.1
          do iz=2,nnz
                 if(txym(iz,1) .gt. (trun(iz) + tcrit)) then
                   itop = iz
@@ -147,17 +146,10 @@ c
       call mpi_bcast(zi,1,mpi_real8,
      +              i_root,mpi_comm_world,ierr)
 c
-      if(iocean .ne. 1) then
-         do iz=1,nnz
-            if(zi .ge. z(iz) .and.
-     +         zi .lt. z(iz+1)) itop = iz
-         enddo
-      else
          do iz=1,nnz
             if(zi .le. z(iz) .and.
      +         zi .gt. z(iz+1)) itop = iz
          enddo
-      endif
 c
 c     if(l_root) write(6,7001) myid,zi,itop
  7001 format(' 7001 in pbltop myid = ',i4,' zi = ',e15.6,

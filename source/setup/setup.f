@@ -88,8 +88,8 @@ c
 c ----------- choose correct sign so gravity waves
 c             propagate out of the domain
 c
-      sgn = 1.0
-      if(iocean .eq. 1) sgn = -1.0
+c      sgn = 1.0
+      sgn = -1.0
       if(ibcu.eq.1) then
          do iy=1,nny
          do ix=1,nnxp2
@@ -179,8 +179,8 @@ c      t_surf_i = 265.0
 c
 c -------------------- do not look for zi below zi_min
 c
-      zi_min = 30.0
-      if(iocean .eq. 1) zi_min = -5.0
+c      zi_min = 30.0
+      zi_min = -5.0
       iz_min = 1
       do iz=1,nnz-1
          if(zz(iz) .lt. zi_min .and.

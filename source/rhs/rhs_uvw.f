@@ -73,7 +73,6 @@ c
 c
 c ---------------- stokes term in ocean cases
 c
-      if(iocean .eq. 1) then
         stokavg     = stokes(iz)*weit1 + stokes(izp1)*weit
         do iy=iys,iye
         do ix=1,nnx
@@ -88,7 +87,6 @@ c
      +                     stokavg*dir_y*(wy(ix,iy,iz) - vz)
         enddo
         enddo
-      endif
 c
 c --------- get tau_13,_23 at iz-1
 c

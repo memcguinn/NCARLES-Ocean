@@ -26,11 +26,7 @@ c     xkmax  = dzdz/dt/5.
       izp1 = iz + 1
 c     xkmax  = dzu(izp1)*dzu(izp1)/(5.0*dt)
       dz_i = dzu_i(izp1)
-      if(iocean .eq. 1) then
            call sufto(it)
-      else
-         call suft(it)
-      endif
       if(qstar(1) .eq. 0.) then
          zeta = 0.0
       else

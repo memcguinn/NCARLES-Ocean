@@ -93,14 +93,8 @@ c         call init_hurr
 c
 c ---------- choose routine for getting initial guess
 c
-         if(iocean .eq. 1) then
             call randoc
 c           call get_fields
-         else
-c           call random_f
-c           call get_fields
-            call random
-         endif
          call get_max
       else
          igrdr = 3
@@ -168,7 +162,7 @@ c
 c      if(msave .and. istage .eq. 1) then
 c         call save_v(it)
 c      endif
-      
+
 c      if(msave_v .and. istage .eq. 1) then
 c         call save_viz(it)
 c      endif
@@ -199,7 +193,7 @@ c
       if(istage.eq.3 .and. flg_reaction.eq.1)then
          call strang1(it)
       endif
-      
+
       if(msave .and. istage .eq. 3) then
          call save_v(it)
       endif

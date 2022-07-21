@@ -48,7 +48,7 @@ c
       m5 = js + 4*nscl
 c
       sgn = 1.0
-      if(iocean .eq. 1 .and. iupwnd .eq. 1) sgn = -1.0
+      if(iupwnd .eq. 1) sgn = -1.0
 c
       do iz=izs,ize
 c

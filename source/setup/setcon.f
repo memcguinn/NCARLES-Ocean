@@ -22,15 +22,11 @@ c
 c
 c ---------------- set min value of e
 c
-      if(iocean .eq. 1) then
 c
          smal_e = 0.0
          smal_e = 1.0e-12
 c        smal_e = 6.0e-03
-      else
-         smal_e = 1.0e-09
-c        smal_e = 0.0
-      endif
+
 c
 c ---------------------- set constants in eddy viscosity model
 c

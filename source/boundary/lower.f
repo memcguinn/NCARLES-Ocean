@@ -24,7 +24,6 @@ c
       enddo
       enddo
 c
-      if(iocean .eq. 1) then
         call sufto(it)
          do iy=iys,iye
          do ix=1,nnx
@@ -39,40 +38,6 @@ c
            enddo
            enddo
          enddo
-c
-      else
-c
-         call suft(it)
-         fac = -utau**2/(windm*sqrt(u1xy**2 + v1xy**2))
-         do iy=iys,iye
-         do ix=1,nnx
-            tau13m(ix,iy)=fac*(windm*(u(ix,iy,iz)+ugal-u1xy)+
-     +                     wind(ix,iy)*u1xy)
-            tau23m(ix,iy)=fac*(windm*(v(ix,iy,iz)-v1xy)+
-     +                     wind(ix,iy)*v1xy)
-         enddo
-         enddo
-         do iscl=1,nscl
-            dnom3=t10xy(iscl)*windm
-            if(dnom3 .ne. 0.) then
-               dnom_i = 1.0/dnom3
-               do iy=iys,iye
-               do ix=1,nnx
-                  taut3m(ix,iy,iscl)=aut3m(iscl)*
-     +                 (windm*(t(ix,iy,iscl,iz)-t1xy(iscl))+
-     +                  wind(ix,iy)*(t1xy(iscl)-tsfcc(iscl)))*dnom_i
-               enddo
-               enddo
-            else
-               do iy=iys,iye
-               do ix=1,nnx
-                  taut3m(ix,iy,iscl) = aut3m(iscl)
-               enddo
-               enddo
-            endif
-         enddo
-c
-      endif
 c
 c -------- partial sums of surface fluxes and mean scalar
 c

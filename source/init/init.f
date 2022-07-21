@@ -14,7 +14,6 @@ c
 c
 c -------------------- case specific data
 c
-      if(iocean .eq. 1) then
          rho_a   = 1.0
          rho_w   = 1000.0
          t00     = 283.
@@ -113,41 +112,6 @@ c
          r_k1     = r_fac*grav/(cd_10*u_10*u_10)
          rk_ratio = r_k1/r_kp
 
-      else
-         rho_a   = 1.0
-         rho_w   = 1000.0
-         t00     = 300.0
-         cp      = 1.e3
-         gcp     = grav/cp
-         batag   = bfac*grav/t00
-         fcor    = 1.0e-04
-         fcor_h  = 0.0
-c
-         wtsfc(1)=0.24
-c        wtsfc(2)=0.00
-c
-         qstar(1)=wtsfc(1)
-c        qstar(2)=wtsfc(2)
-c
-         dtdzf(1)=0.003
-c        dtdzf(2)=0.000
-c
-         dtjump  = 0.0
-         divgls  = 0.0
-         zo      = 0.1
-         ugcont  = 1.0
-         vgcont  = 0.0
-         zi      = 1000.0
-         xl      = 5120.0
-         yl      = 5120.0
-         zl      = 2048.0
-
-c
-c ---------- if stretched grid specify location of first point
-c
-         zw1     = 5.0
-         izi     = 100
-      endif
 c
       time  = 0.0
 c
@@ -234,19 +198,11 @@ c     ugal   = 0.0
       ugal   = ugcont*0.5
 c     ugcont = ugcont - ugal
       cdbtm  = vk*vk/zody/zody
-      if(iocean .eq. 1) then
 c ----------- set surface friction velocity here and in sr. sufto
 c        utau = 4.29e-03
 c         utau = 6.3e-03
          utau = sqrt(rho_a*(8.5e-4)*5.75*5.75/rho_w)
-      else
-         ufree = 0.07*(abs(batag*qstar(1)*dzw(1)))**(1./3.)
-c
-c ---- note : new estimate for utau !!!
-c
-         utau  = vk*(ufree+ugcont)/zody
-c        utau  = vk*(ufree)/zody
-      endif
+
       utau2    = utau*utau
       if(ibuoy .eq. 0 .or. qstar(1) .eq. 0.) then
         amonin = 1000.0

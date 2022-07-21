@@ -9,8 +9,6 @@ c
       use con_stats
       include 'mpif.h'
 c
-      if(iocean .eq. 1) then
-c
 c ----------- compute stokes velocity for ocean pbls
 c
 c        stokesw = pi2/20.0
@@ -28,18 +26,6 @@ c        stokesa = 1.0
             write(6,6000) (iz,zz(iz),stokes(iz),iz=1,nnz)
  6000       format(' iz ',10x,' zz',10x,' stokes',/,(1x,i3,2e12.4))
          endif
-c
-      else
-c
-c ----------------- set stokes velocity = 0 for atmos. pbls
-c
-         do iz=1,nnzp1
-            stokes(iz) = 0.0
-         enddo
-         stokess = 0.0
-         udrift = 0.0
-         vdrift = 0.0
-      endif
 c
       return
       end

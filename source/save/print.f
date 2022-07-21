@@ -41,11 +41,11 @@ c
 19999 continue
       write(lu,4400)tsfcc(1),wtsfc(1)
  4400 format('  SURFACE VALUE: TXYM=',F8.2,'               WTSB=',E9.2)
-      if(iocean .eq. 1) then
+
          write(lu,4500) stokess,udrift,vdrift
  4500    format(/,' STOKESS = ',e12.4,' UDRIFT = ',e12.4,
      +          ' VDRIFT = ',e12.4)
-      endif
+
       write(lu,4600) (iz,uxym(iz)+ugal,vxym(iz),uwle(iz),
      +       uwsb(iz),vwle(iz),vwsb(iz),iz=iz_strt,iz_end)
  4600 format(//,' IZ',5x,' UXYM + UGAL',8x,' VXYM',10x,' UWLE',10x,
@@ -65,7 +65,7 @@ c
      +          '3-MEAN',10x, '4-MEAN', 10x, '5-MEAN',10x,
      +          '6-MEAN',10x
      +       ,/,(1x,i4,6(3x,e13.6)))
- 
+
 c --------------- output additional scalars
 c
 c     if(nscl .eq. 2) then

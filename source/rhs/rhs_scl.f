@@ -16,17 +16,17 @@ c
       real fnt1(nnx,iys:iye,izs:ize)
       real tx(nnx,iys:iye), ty(nnx,iys:iye,izs:ize)
       real flux_u(nnx,iys:iye), flux_l(nnx,iys:iye)
-      real taut3_u(nnx,iys:iye,nscl), taut3_l(nnx,iys:iye,nscl) 
+      real taut3_u(nnx,iys:iye,nscl), taut3_l(nnx,iys:iye,nscl)
       real Sc, tscal, kconst
 c      integer avalue_on = 0
 c
 c --------- set sign for ocean simulations that use monotone
 c
-      sgn = 1.0
-      if(iocean .eq. 1) sgn = -1.0
+c      sgn = 1.0
+      sgn = -1.0   !!! check sgn
       upwn = 2.0
       if(iupwnd .ne. 1) upwn = 1.0
-	
+
 c
 c --------- outer loop over z
 c
@@ -119,14 +119,14 @@ c ----------- z-direction special
 c
          if(iz .eq. 1) then
               do iy=iys,iye
-              do ix=1,nnx 
+              do ix=1,nnx
                 if(iscl.eq.2)then ! air-sea flux bc
                    Sc = 0.0d0
                    kconst = 0.0d0
                    tscal = 0.0d0
                    tscal = t(ix,iy,1,iz) - 273.15d0
                    Sc = 2073.1d0 - 125.62d0*tscal +
-     +                  3.6276d0*tscal*tscal - 
+     +                  3.6276d0*tscal*tscal -
      +                  0.043219d0*tscal*tscal*tscal ! calculate schmidt number (Table A1 in Wanninkof, 1992 for co2)
                    kconst = (2.77778d-6)*
      +                  0.31d0*5.75d0*5.75d0*sqrt(660.0d0/Sc) ! calculate piston velocity (Eq. 3 in Wanninkof, 1992)
@@ -273,7 +273,7 @@ c
 !        do iz=izs,ize
 !           do iy=iys,iye
 !              do ix=1,nnx
-!                 r4(ix,iy,iscl,iz) = r4(ix,iy,iscl,iz) + 
+!                 r4(ix,iy,iscl,iz) = r4(ix,iy,iscl,iz) +
 !     +                react_src(ix,iy,iscl,iz)
 !              enddo
 !           enddo
