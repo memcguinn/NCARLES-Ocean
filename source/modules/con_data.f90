@@ -18,7 +18,7 @@ MODULE con_data
   END TYPE
 
   TYPE(con_d), TARGET :: c_c
-  REAL, POINTER ::                                                          &
+    REAL, POINTER ::                                                        &
             zo, vk, vkin, vk74, vk74in, grav, gcp, fcor, fcor_h, zi, pi2,   &
             batagk, t00, batag, vgcont, ugcont, cdbtm, dtdzf(:), dtjump,    &
             ugal, divgls, z1, utausv, xl, yl, zl, dx, dy, dz, dt, fnxy,     &
@@ -95,5 +95,5 @@ MODULE con_data
     tau_y  => c_c%tau_y
 
   RETURN
-  END SUBROUTINE fill_cc
-END MODULE con_data
+  END SUBROUTINE
+END MODULE 
