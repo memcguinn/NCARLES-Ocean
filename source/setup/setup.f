@@ -35,15 +35,15 @@ c
       endif
 c     if(ifilt.eq.1)call filter
       if(l_root) then
-         write(6,1) nnx,nny,nnz,ismlt,ifilt,iti,itmax,
-     +             iupwnd,ibuoy,noalis,itcut,
-     +             dt,zo,tsfcc(1),isubs,ibrcl,
+         write(6,1) nnx,nny,nnz,ismlt,iti,itmax,
+     +             iupwnd,ibuoy,itcut,
+     +             dt,zo,tsfcc(1),
      +             method, ivis
       endif
       if(l_debug) then
-         write(nprt,1) nnx,nny,nnz,ismlt,ifilt,iti,itmax,
-     +             iupwnd,ibuoy,noalis,itcut,
-     +             dt,zo,tsfcc(1),isubs,ibrcl,
+         write(nprt,1) nnx,nny,nnz,ismlt,iti,itmax,
+     +             iupwnd,ibuoy,itcut,
+     +             dt,zo,tsfcc(1),
      +             method, ivis
       endif
 c
@@ -202,13 +202,11 @@ c --------------------------- format statements
      +       ', UG = ',e12.4)
     1 format(10x,' NNX = ',i5,',  NNY = ',i5,
      + ',  NNZ = ',i5,/,10x,' SFC SMLT = ',i1,
-     + ',  FILTER = ',i1,
      + ',  ITI = ',i6,',  ITMAX = ',i6,/,10x,
      + ' IUPWIND = ',i1,',  BUYNCY = ',i1,
-     + ',  NO ALISNG = ',i1,',  ITCUT = ',i1,/,10x,
+     + ',  ITCUT = ',i1,/,10x,
      + ' DT = ',e15.6,',  ZO = ',e15.6,',  TS = ',e15.6,
-     + ',  SUBSD = ',i1,/,
-     + 10x,' BRCLICITY = ',i1,',  METHOD = ',i1,
+     + 10x,',  METHOD = ',i1,
      + ',  IVIS = ',i1)
  2000 format(10x,' DSL = ',e15.6)
  9000 format(' Search for zi above the height = ',e15.6,/,

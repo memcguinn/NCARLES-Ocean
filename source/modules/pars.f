@@ -66,11 +66,10 @@ c
 c       nscl  .ge. 1   number of scalars to be followed set in parameter statements
 c                      change entries in sr. init, and sr. suft for surface bc's
 c
-      integer, parameter :: noalis=1, ismlt=0, ifree=0, isfc=0,
-     +          iradup=0, iupwnd=1, ibuoy=1, ifilt=0, itcut=1, isubs=0,
-     +          ibrcl=0, method=3, idebug=0, iz_space=0,
-     +          ivis0=1, ifix_dt=1, new_vis=-1, i_dear = 0,
-     +          force_tracer=0
+      integer, parameter :: ismlt=0, ifree=0, isfc=0,
+     +          iradup=0, iupwnd=1, ibuoy=1, itcut=1,
+     +          method=3, idebug=0, iz_space=0,
+     +          ivis0=1, ifix_dt=1, new_vis=-1, i_dear = 0
       integer, parameter :: j_recl=4 !record length in "bytes" for history file
       integer, parameter :: k8=8 !kind parameter for integers in mpi_io routines
 c
