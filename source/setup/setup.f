@@ -38,13 +38,13 @@ c     if(ifilt.eq.1)call filter
          write(6,1) nnx,nny,nnz,ismlt,ifilt,iti,itmax,
      +             iupwnd,ibuoy,noalis,itcut,
      +             dt,zo,tsfcc(1),isubs,ibrcl,
-     +             method, iocean, ivis
+     +             method, ivis
       endif
       if(l_debug) then
          write(nprt,1) nnx,nny,nnz,ismlt,ifilt,iti,itmax,
      +             iupwnd,ibuoy,noalis,itcut,
      +             dt,zo,tsfcc(1),isubs,ibrcl,
-     +             method, iocean, ivis
+     +             method, ivis
       endif
 c
 c -------------- boundary condition flags
@@ -208,7 +208,7 @@ c --------------------------- format statements
      + ',  NO ALISNG = ',i1,',  ITCUT = ',i1,/,10x,
      + ' DT = ',e15.6,',  ZO = ',e15.6,',  TS = ',e15.6,
      + ',  SUBSD = ',i1,/,
-     + 10x,' BRCLICITY = ',i1,',  METHOD = ',i1,',  IOCEAN = ',i1,
+     + 10x,' BRCLICITY = ',i1,',  METHOD = ',i1,
      + ',  IVIS = ',i1)
  2000 format(10x,' DSL = ',e15.6)
  9000 format(' Search for zi above the height = ',e15.6,/,
