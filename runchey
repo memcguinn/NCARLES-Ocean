@@ -14,7 +14,16 @@
 ### dirm: Location of the submit script and output directory
 ### csrc: Directory containing code source
 
-rund=CHECK
+user=mmcguinn
+jobn=ncarles
+pnum=UCHS0001
+rnam=ncarles_refa_tests
+rtyp=economy
+tihh=0
+timm=10
+nnds=1
+runo=logfile.out
+rund=ncarles_v2.0
 csrc=source
 
 echo '--------------------------------------'
@@ -48,6 +57,7 @@ cp $csrc/stokes/* $rund/code/
 cp $csrc/tracer/* $rund/code/
 cp $csrc/trans/* $rund/code/
 echo '---> Code Base Copied'
+echo ''
 
 cd $rund/code
 
@@ -62,10 +72,10 @@ module load impi
 echo '---> Modules Load Complete'
 
 # PRE-COMPILE
-mpif90 -r8 -132 -O3 -c pars.f90 con_data.f90 con_stats.f90 fftwk.f90 fields.f90 tracerbc.f90 reaction.f90 -limf -lm
+mpif90 -r8 -132 -O3 -c pars.f con_data.f90 con_stats.f fftwk.f fields.f tracerbc.f90 reaction.f90 -limf -lm
 echo '---> Precompile Complete'
 # COMPILE
-mpif90 -r8 -132 -O3 -o lesmpi *.f90 -limf -lm
+mpif90 -r8 -132 -O3 -o lesmpi *.f *.f90 -limf -lm
 echo '---> Compile Complete'
 
 # COPY EXECUTABLE TO MAIN DIRECTORY
@@ -74,4 +84,35 @@ cp code/lesmpi .
 echo 4 > mach.file
 echo '---> Executable Made and Copied'
 echo '---> Complete Program Compile for' $rund
+echo ''
+
+###############################################
+### CREATE PBS SCRIPTS FOR ANALYSIS AND RUN ###
+###############################################
+
+# EXECUTE SCRIPT
+cat > EXEC_STEP << EXEC
+#!/bin/sh
+#PBS -N $rund
+#PBS -l walltime=$tihh:$timm:00
+#PBS -l select=$nnds:ncpus=32:mpiprocs=32
+#PBS -A $pnum
+#PBS -q $rtyp
+#PBS -o exec.out
+#PBS -e exec.err
+
+module purge
+module load intel/17.0.1
+module load impi
+
+mpirun ./lesmpi > $runo
+EXEC
+
+
+echo '--------------------------------------'
+echo '             Execute Step             '
+echo '--------------------------------------'
+
+echo '---> Running' $rund
+qsub < EXEC_STEP
 echo ''

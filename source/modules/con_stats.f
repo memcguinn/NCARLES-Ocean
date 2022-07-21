@@ -1,7 +1,7 @@
-      module con_stats
-        use pars
-        type con_s
-        sequence
+MODULE con_stats
+  USE pars
+  TYPE con_s
+  SEQUENCE
         real ::  wwsb(maxnz),engz(0:maxnz1),
      +           engsbz(0:maxnz1),
      +           englez(maxnz),uxym(0:maxnz1),

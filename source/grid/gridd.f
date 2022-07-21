@@ -12,7 +12,6 @@ c ------------- establish association between pointers
 c               and data structures, hurricane data also
 c
       call fill_cc
-      call fill_ch
       call fill_cs
 c
 c
