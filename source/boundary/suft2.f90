@@ -8,7 +8,6 @@ SUBROUTINE suft2(u_level1,it)
   USE fields
   USE con_data
   USE con_stats
-  IMPLICIT NONE
 
   REAL u_level1(nnx,iys:iye,2+nscl)
 

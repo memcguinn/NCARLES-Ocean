@@ -10,7 +10,6 @@ SUBROUTINE lower(it)
   USE con_data
   USE con_stats
 
-  IMPLICIT NONE
   REAL sfc_flx(2+nscl)
 
   iz   = 1

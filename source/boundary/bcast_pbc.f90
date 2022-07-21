@@ -3,7 +3,6 @@ SUBROUTINE bcast_pbc
 
   USE pars
   USE fields
-  IMPLICIT NONE
 
   INCLUDE 'mpif.h'
   INTEGER :: istatus(mpi_status_size)

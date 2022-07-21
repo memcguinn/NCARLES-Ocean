@@ -4,7 +4,8 @@ SUBROUTINE sufto(it)
   USE fields
   USE con_data
   USE con_stats
-      real buf(3+nscl)
+
+  REAL buf(3+nscl)
 c
 c ------- version of similarity theory adpated for ocean flows
 c      option to use businger or large version of similarity theory

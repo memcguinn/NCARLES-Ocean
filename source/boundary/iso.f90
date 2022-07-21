@@ -6,7 +6,6 @@ SUBROUTINE iso(it)
   USE con_data
   USE con_stats
 
-  IMPLICIT NONE
   INCLUDE 'mpif.h'
 
   REAL :: sfk(1:nnz)
