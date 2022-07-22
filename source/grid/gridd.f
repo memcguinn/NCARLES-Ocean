@@ -9,7 +9,7 @@ c
       use con_stats
 c
 c ------------- establish association between pointers
-c               and data structures, hurricane data also
+c               and data structures
 c
       call fill_cc
       call fill_cs
