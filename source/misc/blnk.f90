@@ -1,8 +1,8 @@
 SUBROUTINE blnk(word)
 
-  CHARACTER word*(*)
+  CHARACTER :: word*(*)
 
-  nchar = len(word)
+  nchar = LEN(word)
 
   DO j=1,nchar
     word(j:j) = ' '
