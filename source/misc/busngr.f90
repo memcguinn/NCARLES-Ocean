@@ -1,8 +1,8 @@
 SUBROUTINE busngr(zeta,phim,phis,psim,psis)
 ! BUSINGER VERSION OF SIMILARITY THEORY
 
-DATA pih /1.57079633/
-SAVE pih
+  DATA pih /1.57079633/
+  SAVE pih
 
   IF(zeta .LT. 0.) THEN
     x=(1.0 - 15.0*zeta)**0.25
@@ -14,7 +14,7 @@ SAVE pih
     y = SQRT(1.0-9.0*zeta)
     phis = 0.74/y
     psis = ALOG((1.0+y)/2.0)*2.0
-  ELSE IF(zeta .gt. 0) THEN
+  ELSE IF(zeta .GT. 0) THEN
     phim = 1.0 + 4.7*zeta
     phis = 0.74 + 4.7*zeta
     psim = -4.7*zeta
