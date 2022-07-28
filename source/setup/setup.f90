@@ -168,8 +168,6 @@ SUBROUTINE setup(it)
     WRITE(6,9000) zi_min, iz_min
   ENDIF
 
-  9998 continue
-
   RETURN
 
 ! FORMAT STATEMENTS

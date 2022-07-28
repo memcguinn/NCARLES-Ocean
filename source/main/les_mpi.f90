@@ -4,7 +4,8 @@ PROGRAM les_mpi
   USE fields
   USE con_data
   USE con_stats
-  USE tracerbc, only: applytracerbc
+  USE tracerbc, ONLY: applytracerbc
+
   INCLUDE 'mpif.h'
 
   ! INITIALIZE MPI, GET MYID, NUMPROCS
@@ -42,7 +43,7 @@ PROGRAM les_mpi
     CALL setup(it)
 
     ! CHOOSE ROUTINE FOR GETTING INITIAL GUESS
-    CALL rANDoc
+    CALL randoc
     CALL get_max
   ELSE
     igrdr = 3
@@ -157,4 +158,4 @@ PROGRAM les_mpi
   CALL mpi_finalize(ierr)
 
   STOP
-END PROGRAM 
+END PROGRAM

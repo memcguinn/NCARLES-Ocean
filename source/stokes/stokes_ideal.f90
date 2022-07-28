@@ -21,8 +21,11 @@ SUBROUTINE stokes_ideal
 
   IF(l_root) THEN
     WRITE(6,6000) (iz,zz(iz),stokes(iz),iz=1,nnz)
-    6000 FORMAT(' iz ',10x,' zz',10x,' stokes',/,(1x,i3,2e12.4))
   ENDIF
 
   RETURN
+
+! FORMAT
+6000 FORMAT(' iz ',10x,' zz',10x,' stokes',/,(1x,i3,2e12.4))
+
 END SUBROUTINE

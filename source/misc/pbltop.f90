@@ -37,7 +37,6 @@ SUBROUTINE pbltop(itop)
         ENDIF
       ENDDO
       zi=z(itop)
-
     ELSE IF (method .EQ. 1) THEN
       itop = 1
       crit = 0.05
@@ -50,7 +49,6 @@ SUBROUTINE pbltop(itop)
         ENDIF
       ENDDO
       zi=z(itop)
-
     ELSE IF (method .EQ. 2) THEN
       trun(1) = txym(1,1)
       DO iz=2,nnz
@@ -62,10 +60,10 @@ SUBROUTINE pbltop(itop)
       DO iz=2,nnz
         IF(txym(iz,1) .GT. (trun(iz) + tcrit)) THEN
           itop = iz
-          GO TO 320
+          EXIT
         ENDIF
+        EXIT
       ENDDO
-      320    CONTINUE
       zi=z(itop)
     ENDIF
 
@@ -126,7 +124,9 @@ SUBROUTINE pbltop(itop)
     IF(zi .LE. z(iz) .AND. zi .GT. z(iz+1)) itop = iz
   ENDDO
 
-  7001 FORMAT(' 7001 in pbltop myid = ',i4,' zi = ',e15.6,' itop = ',i3)
-
   RETURN
+
+! FORMAT
+7001  FORMAT(' 7001 in pbltop myid = ',i4,' zi = ',e15.6,' itop = ',i3)
+
 END SUBROUTINE

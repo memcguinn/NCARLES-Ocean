@@ -7,6 +7,7 @@ SUBROUTINE stokesv
   USE fftwk
   USE con_data
   USE con_stats
+  
   INCLUDE 'mpif.h'
 
   ! DONELAN SPACE (CONSTANTS SET IN INIT)
@@ -37,7 +38,6 @@ SUBROUTINE stokesv
 
   IF(l_root) THEN
     WRITE(6,6000) (iz,zz(iz),stokes(iz),iz=1,nnz)
-    6000 FORMAT(' iz ',10x,' zz',10x,' stokes',/,(1x,i3,2e12.4))
   ENDIF
 
   dir_x = 1.0
@@ -45,6 +45,8 @@ SUBROUTINE stokesv
 
   RETURN
 
-  2212 FORMAT('#k ',/,'#m 4',/,'#lw 1.0',/,(2e15.6))
+! FORMAT
+2212  FORMAT('#k ',/,'#m 4',/,'#lw 1.0',/,(2e15.6))
+6000  FORMAT(' iz ',10x,' zz',10x,' stokes',/,(1x,i3,2e12.4))
 
 END SUBROUTINE

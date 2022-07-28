@@ -3,7 +3,6 @@ SUBROUTINE set_range
   USE pars
 
   WRITE(nprt,7002) nnx,nny,nnz
-  7002 FORMAT(' 7002 gridd nnx = ',i4,' nny = ',i4,' nnz = ',i4)
 
   ii = -1
   DO nn=0,ncpu_z-1
@@ -63,14 +62,17 @@ SUBROUTINE set_range
   IF(l_debug) THEN
     WRITE(nprt,1200) myid, (nn, ix_s(nn), ix_e(nn), jx_s(nn), jx_e(nn),     &
           kx_s(nn), kx_e(nn), nn = 0,numprocs-1)
-    1200 FORMAT(' myid =  ',i4,/,' nn',5x,' ixs ',5x,' ixe ',5x,' jxs ',5x, &
-          ' jxe ',5x,' kxs ',5x,' kxe',/,(7i6))
-
     WRITE(nprt,1213) myid, (nn, iy_s(nn), iy_e(nn), jy_s(nn), jy_e(nn),     &
           iz_s(nn), iz_e(nn), is_s(nn), is_e(nn), nn=0,numprocs-1)
-    1213 FORMAT(' myid = ',i3,/,' nn ',3x,' iys ',5x,' iye ',5x,' jys ',5x, &
-          ' jye ',5x,' izs ',5x,' ize',5x,' iss ',5x,' ise ',/,(9i6))
   ENDIF
 
   RETURN
+
+! FORMAT
+7002  FORMAT(' 7002 gridd nnx = ',i4,' nny = ',i4,' nnz = ',i4)
+1200  FORMAT(' myid =  ',i4,/,' nn',5x,' ixs ',5x,' ixe ',5x,' jxs ',5x,    &
+            ' jxe ',5x,' kxs ',5x,' kxe',/,(7i6))
+1213  FORMAT(' myid = ',i3,/,' nn ',3x,' iys ',5x,' iye ',5x,' jys ',5x,    &
+            ' jye ',5x,' izs ',5x,' ize',5x,' iss ',5x,' ise ',/,(9i6))
+
 END SUBROUTINE
