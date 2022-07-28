@@ -19,7 +19,7 @@ SUBROUTINE ytox_trans(g,f,nx,ny,ixs,ixe,ix_s,ix_e,iys,iye,iy_s,iy_e,iz1,    &
   DO i=iss,ise
     nsend = (iy_e(i) - iy_s(i) + 1)*ik
     nrecv = (ix_e(i) - ix_s(i) + 1)*jk
-    IF(i .EQ. myid) THEN
+    IF(i == myid) THEN
       CALL send_ytox(g,ft(1),ny,ix_s(myid),ix_e(myid),iy_s(i),iy_e(i),iz1,iz2)
     ELSE
       CALL send_ytox(g,gt(1),ny,ix_s(myid),ix_e(myid),iy_s(i),iy_e(i),iz1,iz2)

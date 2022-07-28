@@ -24,7 +24,7 @@ SUBROUTINE iso(it)
   ! SET MATCH EQUAL TO FRACTION OF INITIAL ZI IN SR. RANDOM
   nmatch = nnz
   DO i=0,numprocs-1,ncpu_s
-    IF(nmatch .GE. iz_s(i) .AND. nmatch .LE. iz_e(i)) myid_newvis = i
+    IF(nmatch >= iz_s(i) .AND. nmatch <= iz_e(i)) myid_newvis = i
   ENDDO
 
   DO iz=izs,MIN(ize,nmatch)
@@ -63,19 +63,17 @@ SUBROUTINE iso(it)
     smk = SQRT((u_mn(izp1)-u_mn(iz))**2 + (v_mn(izp1)-v_mn(iz))**2)*        &
           ABS(dzu_i(izp1))
 
-    IF(sfk(iz) .LE. 0. .AND. smk .LE. 0.) THEN
+    IF(sfk(iz) <= 0. .AND. smk <= 0.) THEN
       dfac(iz) = 1.0
     ELSE
       dfac(iz) = sfk(iz)/(sfk(iz) + smk)
     ENDIF
-
-    6001 FORMAT(' iz = ',i3,' sfk = ',e15.6,' smk = ',e15.6,' dfac = ',e15.6)
   ENDDO
 
 
   ! RESCALE RATIO TO GIVE UNITY AT MATCH HEIGHT
   ! IF NESTED GRID, MATCH VALUE AT UPPER BOUNDARY OF COARSER GRID
-  IF(myid .EQ. myid_newvis) THEN
+  IF(myid == myid_newvis) THEN
     dfacm = dfac(nmatch)
   ENDIF
 
@@ -92,14 +90,17 @@ SUBROUTINE iso(it)
   ! USE REDUCE AND DIVIDE BY NUMBER OF SLAB CPUS
   CALL mpi_sum_z(dfac,i_root,myid,nnz,1)
 
-  fncpu_s = 1.0/float(ncpu_s)
+  fncpu_s = 1.0/FLOAT(ncpu_s)
   DO iz=1,nnz
     dfac(iz) = dfac(iz)*fncpu_s
   ENDDO
 
-  6000 FORMAT(' in sr. iso, nmatch = ',i3,/,' ivis = ',i3,'iz',5x,'dfac'    &
-        ,/,(i3,1x,e15.6))
-  3001 FORMAT(' iz ',5x,' dfac ',/,(i5,e15.6))
-
   RETURN
+
+! FORMAT
+6001 FORMAT(' iz = ',i3,' sfk = ',e15.6,' smk = ',e15.6,' dfac = ',e15.6)
+6000 FORMAT(' in sr. iso, nmatch = ',i3,/,' ivis = ',i3,'iz',5x,'dfac'      &
+            ,/,(i3,1x,e15.6))
+3001 FORMAT(' iz ',5x,' dfac ',/,(i5,e15.6))
+
 END SUBROUTINE

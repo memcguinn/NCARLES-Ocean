@@ -49,7 +49,7 @@ SUBROUTINE comp2
       ENDDO
     ENDDO
 
-    IF (iz.NE.nnz) THEN
+    IF (iz/=nnz) THEN
       DO iy=iys,iye
         DO ix=1,nnx
           r3(ix,iy,iz) = r3(ix,iy,iz) - (p(ix,iy,izp1)-p(ix,iy,iz))*dzu_i(izp1)
@@ -60,7 +60,7 @@ SUBROUTINE comp2
     ENDIF
 
     ! TIME STEPPING WITH 3RD ORDER RK METHOD FIRST W VARIABLES
-    IF(iz .NE. nnz) THEN
+    IF(iz /= nnz) THEN
       DO iy=iys,iye
         DO ix=1,nnx
           e(ix,iy,iz)  = e(ix,iy,iz)+dtgama*r5(ix,iy,iz)

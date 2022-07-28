@@ -1,7 +1,7 @@
 SUBROUTINE tridv(b,d,a,r,n,j1,j2)
 ! TRIDIAGONAL MATRIX SOLVER WITH MULTIPLE VECTORS (NOTE: J AND I LOOPS ARE
 ! REVERSED FROM CRAY VERSION)
-! INPUT:  N     - SIZE OF A,B,D, AND R 
+! INPUT:  N     - SIZE OF A,B,D, AND R
 !         B     - BELOW DIAGONAL ELEMENTS (B(1) NOT USED)
 !         D     - DIAGONAL ELEMENTS
 !         A     - ABOVE DIAGONAL ELEMENTS (A(N) NOT USED)
@@ -11,7 +11,7 @@ SUBROUTINE tridv(b,d,a,r,n,j1,j2)
 
   REAL :: b(n,j1:j2), d(n,j1:j2), a(n,j1:j2), r(n,j1:j2)
 
-  IF(n .GT. 1) THEN
+  IF(n > 1) THEN
     DO j=j1,j2
       d(1,j) = 1.0/d(1,j)
     ENDDO

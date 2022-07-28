@@ -17,7 +17,7 @@ SUBROUTINE randoc
   tmixed = 298.15
 
   DO iz=izs,ize
-    IF (iz.LE.izi) THEN
+    IF (iz<=izi) THEN
       DO iy=iys,iye
         DO ix=1,nnx
           u(ix,iy,iz)   = ugcont-ugal
@@ -29,7 +29,7 @@ SUBROUTINE randoc
       ENDDO
     ENDIF
 
-    IF (iz.GT.izi) THEN
+    IF (iz>izi) THEN
       DO iy=iys,iye
         DO ix=1,nnx
           u(ix,iy,iz)   = ugcont-ugal
@@ -64,7 +64,7 @@ SUBROUTINE randoc
   ! SET INITIAL RANDOM FIELD TO BE DIVERGENCE FREE
   idum = -1
   DO iz=izs,ize
-    IF (iz.LE.8) THEN
+    IF (iz<=8) THEN
 
       ! AMPV AND AMPT ARE MAX AMPLITUDES OF RANDOM VELOCITY AND TEMPERATURE FIELDS
       ampv = 0.01
@@ -92,7 +92,7 @@ SUBROUTINE randoc
       DO iy=iys,iye
         DO ix=1,nnx
           vmag = SQRT(psix(ix,iy)**2 + psiy(ix,iy,izs)**2)
-          IF(vmag .GT. vmaxx) vmaxx = vmag
+          IF(vmag > vmaxx) vmaxx = vmag
         ENDDO
       ENDDO
 

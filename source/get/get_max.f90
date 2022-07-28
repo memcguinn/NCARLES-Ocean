@@ -8,7 +8,7 @@ SUBROUTINE get_max
   USE con_stats
   INCLUDE 'mpif.h'
 
-  REAL :: u_sEND(6), u_recv(6)
+  REAL :: u_send(6), u_recv(6)
 
   dx_i = 1.0/dx
   dy_i = 1.0/dy
@@ -46,14 +46,14 @@ SUBROUTINE get_max
     vis_temp = AMAX1(vis_xy,vis_temp)
   ENDDO
 
-  u_sEND(1) = u_temp
-  u_sEND(2) = v_temp
-  u_sEND(3) = w_temp
-  u_sEND(4) = wsav
-  u_sEND(5) = e_temp
-  u_sEND(6) = vis_temp
+  u_send(1) = u_temp
+  u_send(2) = v_temp
+  u_send(3) = w_temp
+  u_send(4) = wsav
+  u_send(5) = e_temp
+  u_send(6) = vis_temp
 
-  CALL mpi_allreduce(u_sEND,u_recv,6,mpi_real8,mpi_max,mpi_comm_world,ierror)
+  CALL mpi_allreduce(u_send,u_recv,6,mpi_real8,mpi_max,mpi_comm_world,ierror)
 
   umax   = u_recv(1)
   vmax   = u_recv(2)

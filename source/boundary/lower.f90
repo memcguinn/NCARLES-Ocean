@@ -10,7 +10,7 @@ SUBROUTINE lower(it)
   USE con_data
   USE con_stats
 
-  REAL sfc_flx(2+nscl)
+  REAL :: sfc_flx(2+nscl)
 
   iz   = 1
   izm1 = iz - 1
@@ -72,9 +72,6 @@ SUBROUTINE lower(it)
 
   WRITE(nprt,2345) uwsfc, vwsfc, wtsfc(nscl), tsfcc(nscl)
 
-2345 FORMAT(' in lower 2345 uwsfc = ',e15.6,' vwsfc = ',e15.6,' wtsfc = ',  &
-      e15.6,' tsfcc = ',e15.6)
-
   DO iy=iys,iye
     DO ix=1,nnx
       dudz     = 2.*(u(ix,iy,iz) + ugal)*dz_i
@@ -121,4 +118,9 @@ SUBROUTINE lower(it)
   ENDDO
 
   RETURN
+
+! FORMAT
+2345  FORMAT(' in lower 2345 uwsfc = ',e15.6,' vwsfc = ',e15.6,' wtsfc = ', &
+            e15.6,' tsfcc = ',e15.6)
+
 END SUBROUTINE

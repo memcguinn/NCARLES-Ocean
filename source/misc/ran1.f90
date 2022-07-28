@@ -19,13 +19,13 @@ FUNCTION ran1(idum)
   eps=1.2e-07
   rnmx=1.0-eps
 
-  IF(idum .LE. 0 .OR. iy .EQ. 0) THEN
+  IF(idum <= 0 .OR. iy == 0) THEN
     idum = MAX(-idum,1)
     DO j=ntab+8,1,-1
       k = idum/iq
       idum = ia*(idum - k*iq) - ir*k
-      IF(idum .LT. 0) idum = idum + im
-      IF(j .LE. ntab) iv(j) = idum
+      IF(idum < 0) idum = idum + im
+      IF(j <= ntab) iv(j) = idum
     ENDDO
     iy = iv(1)
   ENDIF
@@ -33,7 +33,7 @@ FUNCTION ran1(idum)
   k     = idum/iq
   idum  = ia*(idum - k*iq) - ir*k
 
-  IF(idum .LT. 0) idum = idum + im
+  IF(idum < 0) idum = idum + im
 
   j     = 1 + iy/ndiv
   iy    = iv(j)

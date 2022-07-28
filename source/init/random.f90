@@ -36,13 +36,13 @@ SUBROUTINE random
       ENDDO
     ENDDO
 
-    IF(z(iz) .LE. z_lower) THEN
+    IF(z(iz) <= z_lower) THEN
       DO iy=iys,iye
         DO ix=1,nnx
           t(ix,iy,1,iz) = t_lower
         ENDDO
       ENDDO
-    ELSEIF(z(iz) .GE. z_upper) THEN
+    ELSEIF(z(iz) >= z_upper) THEN
       DO iy=iys,iye
         DO ix=1,nnx
           t(ix,iy,1,iz) = t_upper + (zz(iz) - z_upper)*dtdzf(1)
@@ -107,12 +107,12 @@ SUBROUTINE random
     DO iy=iys,iye
       DO ix=1,nnx
         vmag = SQRT(psix(ix,iy)**2 + psiy(ix,iy,izs)**2)
-        IF(vmag .GT. vmaxx) vmaxx = vmag
+        IF(vmag > vmaxx) vmaxx = vmag
       ENDDO
     ENDDO
 
     facv = ampv/vmaxx
-    IF (z(iz) .LE. 50.0) THEN
+    IF (z(iz) <= 50.0) THEN
       DO iy=iys,iye
         DO ix=1,nnx
           u(ix,iy,iz)   = u(ix,iy,iz) - psiy(ix,iy,izs)*facv
@@ -122,7 +122,7 @@ SUBROUTINE random
       ENDDO
     ENDIF
 
-    IF(z(iz) .LE. 250.0) THEN
+    IF(z(iz) <= 250.0) THEN
       DO iy=iys,iye
         DO ix=1,nnx
           e(ix,iy,iz) = 0.4*(1.0 - z(iz)/250.0)**3
@@ -161,4 +161,5 @@ SUBROUTINE random
 ! FORMAT
 6000  FORMAT(' check of divergence for initial state',/,' iz ',5x,' divergence')
 6100  FORMAT(i5,e15.6)
+
 END SUBROUTINE

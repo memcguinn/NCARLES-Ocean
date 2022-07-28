@@ -11,7 +11,7 @@ SUBROUTINE init
   grav   = 9.81
   bfac   = 1.0
 
-  IF(ibuoy.EQ.0) bfac = 0.
+  IF(ibuoy==0) bfac = 0.
 
   ! CASE SPECIFIC DATA
   rho_a   = 1.0
@@ -105,7 +105,7 @@ SUBROUTINE init
   zwstrt = 0.0
 
   ! IF UNIFORM VERTICAL SPACING
-  IF(iz_space .EQ. 0) THEN
+  IF(iz_space == 0) THEN
 
     ! BUILD Z GRID FOR W POINTS
     DO iz=0,nnz+1
@@ -145,7 +145,7 @@ SUBROUTINE init
   zodyin = 1./zody
   wstar  = ABS(batag*zi*wtsfc(1))**(1./3.)
 
-  IF(ismlt .EQ. 1) THEN
+  IF(ismlt == 1) THEN
     ! SET CONSTANTS FOR BUSINGER SIMILARITY FUNCTIONS
     vk74   = vk*0.74
     vk74in = 0.74/vk
@@ -164,7 +164,7 @@ SUBROUTINE init
   utau = SQRT(rho_a*(8.5e-4)*5.75*5.75/rho_w)
 
   utau2    = utau*utau
-  IF(ibuoy .EQ. 0 .or. qstar(1) .EQ. 0.) THEN
+  IF(ibuoy == 0 .or. qstar(1) == 0.) THEN
     amonin = 1000.0
   ELSE
     amonin = -utau2*utau/(batagk*qstar(1))

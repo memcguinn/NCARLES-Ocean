@@ -73,7 +73,7 @@ SUBROUTINE rhs_uvw(istep)
     ENDDO
 
     ! GET TAU_13,_23 AT IZ-1
-    IF (iz.NE.1 .OR. ibcl.NE.0) THEN
+    IF (iz/=1 .OR. ibcl/=0) THEN
       DO iy=iys,iye
         DO ix=1,nnx
           uzm = (u(ix,iy,iz)-u(ix,iy,izm1))*dzu_i(iz)
@@ -130,7 +130,7 @@ SUBROUTINE rhs_uvw(istep)
     ENDDO
 
     ! SAVE SGS FLUXES FOR PRINTOUT
-    IF(istep .EQ. 1) THEN
+    IF(istep == 1) THEN
       uwsb(iz)   = 0.0
       vwsb(iz)   = 0.0
       wwsb(iz)   = 0.0
@@ -214,7 +214,7 @@ SUBROUTINE rhs_uvw(istep)
 
   ! MAKE SURE <R3> = 0 AND SET R3 = 0 AT TOP
   DO iz=izs,ize
-    IF(iz .EQ. nnz) THEN
+    IF(iz == nnz) THEN
       DO iy=iys,iye
         DO ix=1,nnx
           r3(ix,iy,iz) = 0.0

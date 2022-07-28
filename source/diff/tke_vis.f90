@@ -16,7 +16,7 @@ subroutine tke_vis(istep)
   REAL alk(nnx,iys:iye,izs-1:ize+1)
 
   ! GET LENGTH SCALES AND EDDY VISCOSITY
-  IF(i_dear .EQ. 0) THEN
+  IF(i_dear == 0) THEN
     CALL dear_vis(alk)
   ELSE
     CALL schu_vis(alk)
@@ -28,8 +28,8 @@ subroutine tke_vis(istep)
     izm1         = iz - 1
     izp1         = iz + 1
     vis_mean(iz) = 0.0
-    IF(ivis .EQ. 1 .AND. iz .LE. nmatch) THEN
-      IF(iz .LE. 1) THEN
+    IF(ivis == 1 .AND. iz <= nmatch) THEN
+      IF(iz <= 1) THEN
         vis_mean(iz) = xksurf
       ELSE
         stravg = SQRT((u_mn(izp1)-u_mn(iz))**2 + (v_mn(izp1)-v_mn(iz))**2)* &
@@ -84,7 +84,7 @@ subroutine tke_vis(istep)
     vxymm=0.
     vxymp=0.
 
-    IF(ivis .EQ. 1 .AND. iz .LE. nmatch) THEN
+    IF(ivis == 1 .AND. iz <= nmatch) THEN
       uxymm = u_mn(iz)
       uxymp = u_mn(izp1)
       vxymm = v_mn(iz)
@@ -137,7 +137,7 @@ subroutine tke_vis(istep)
     ! COMPUTE SHEAR, BUOYANCY, DIFFUSION
     ! TERMS IN SGS E EQUATION FOR PRINTOUT
     ! *** TRIZ IS ONLY IN VERTICAL DIFFUSION ***
-    IF(istep .EQ. 1) THEN
+    IF(istep == 1) THEN
       shrz(iz)   = 0.0
       triz(iz)   = 0.0
       t_diss(iz) = 0.0

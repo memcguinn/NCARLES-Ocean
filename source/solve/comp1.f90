@@ -53,7 +53,7 @@ SUBROUTINE comp1(istep,it)
   ENDDO
 
   ! GATHER STAT SUMS ON ROOT PROCESSOR USING MPI_REDUCTION OVER ALL PROCESSORS
-  IF(istep .EQ. 1) THEN
+  IF(istep == 1) THEN
     DO j=1,nstat
       DO iz=1,nnz
         stat(iz,j) = 0.0

@@ -10,13 +10,13 @@ SUBROUTINE setup(it)
   it_counter = it - iti
 
   ! TURN ON NEW SGS MODEL AT A PARTICULAR STEP
-  IF(it .GE. new_vis .AND. ivis0 .EQ. 1) THEN
+  IF(it >= new_vis .AND. ivis0 == 1) THEN
     ivis = 1
   ELSE
     ivis = 0
   ENDIF
 
-  IF(igrdr .EQ. 3) THEN
+  IF(igrdr == 3) THEN
     IF(l_root) THEN
       WRITE(6,6)iti,utau,tsfcc(1) ,qstar(1)
       WRITE(6,510)
@@ -52,7 +52,7 @@ SUBROUTINE setup(it)
   ! COMPUTATION IN DERIVATIVES XDERIV AND YDERIV
   DO i=1,nnx
     xkn(i) = FLOAT(i-1)*pi2/xl
-    IF(i.GT.ncx)xkn(i) = -FLOAT(nnx-i+1)*pi2/xl
+    IF(i>ncx)xkn(i) = -FLOAT(nnx-i+1)*pi2/xl
   ENDDO
 
   fn = 1.0/FLOAT(nnx)
@@ -62,7 +62,7 @@ SUBROUTINE setup(it)
 
   DO i=1,nny
     ykn(i) = FLOAT(i-1)*pi2/yl
-    IF(i.GT.ncy)ykn(i) = -FLOAT(nny-i+1)*pi2/yl
+    IF(i>ncy)ykn(i) = -FLOAT(nny-i+1)*pi2/yl
   ENDDO
 
   fn = 1.0/FLOAT(nny)
@@ -85,7 +85,7 @@ SUBROUTINE setup(it)
 
   ! CHOOSE CORRECT SIGN SO GRAVITY WAVES PROPAGATE OUT OF THE DOMAIN
   sgn = -1.0
-  IF(ibcu.EQ.1) THEN
+  IF(ibcu==1) THEN
     DO iy=1,nny
       DO ix=1,nnxp2
         IF(xks(ix,iy) .le. 0.) THEN
@@ -98,7 +98,7 @@ SUBROUTINE setup(it)
   ENDIF
 
   ! SET LENGTH SCALE FOR SGS MODEL
-  IF(iz_space .EQ. 0) THEN
+  IF(iz_space == 0) THEN
 
     ! UNIFORM VERITCAL SPACING
     dx32 = dx*3./2.
@@ -124,7 +124,7 @@ SUBROUTINE setup(it)
     dsl_max = (ABS(dx32*dy32*dzw(0)))**(1./3.)
     DO iz=0,nnzp1
       dsl_z(iz) = (ABS(dx32*dy32*dzw(iz)))**(1./3.)
-      IF(dsl_z(iz) .GT. dsl_max) dsl_max = dsl_z(iz)
+      IF(dsl_z(iz) > dsl_max) dsl_max = dsl_z(iz)
     ENDDO
 
     dsl  = dsl_max
@@ -135,7 +135,7 @@ SUBROUTINE setup(it)
   sml_eg = smal_e*gridr
 
   ! GET VISCOSITY MODEL PARAMETERS
-  IF(ivis .NE. 1) THEN
+  IF(ivis /= 1) THEN
     viscon = 0.0
     xksurf = 0.0
     nmatch = -1
@@ -161,7 +161,7 @@ SUBROUTINE setup(it)
   zi_min = -5.0
   iz_min = 1
   DO iz=1,nnz-1
-    IF(zz(iz) .LT. zi_min .AND. zz(iz+1) .GE. zi_min) iz_min = iz
+    IF(zz(iz) < zi_min .AND. zz(iz+1) >= zi_min) iz_min = iz
   ENDDO
 
   IF(l_root) THEN

@@ -19,7 +19,7 @@ SUBROUTINE upper
   izp1 = iz + 1
   izp2 = iz + 2
 
-  IF(ibcu .EQ. 0) THEN
+  IF(ibcu == 0) THEN
 
     ! BOUNDARY CONDITIONS ARE GRADIENT CONDITIONS
     DO iy=iys,iye
@@ -55,7 +55,7 @@ SUBROUTINE upper
       ENDDO
     ENDDO
 
-  ELSE IF(ibcu .EQ. 1) THEN
+  ELSE IF(ibcu == 1) THEN
     ! SPECIAL IF IRADUP BC
     ! GET ESTIMATE OF W FROM CONTINUTITY AND LINEARIZED RELATION FOR PRESSURE
     xmeanp = 0.0

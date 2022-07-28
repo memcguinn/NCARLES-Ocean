@@ -20,7 +20,7 @@ SUBROUTINE xtoy_trans(f,g,nx,ny,ixs,ixe,ix_s,ix_e,iys,iye,iy_s,iy_e,iz1,    &
   DO i=iss,ise
     nsend = (ix_e(i) - ix_s(i) + 1)*jk
     nrecv = (iy_e(i) - iy_s(i) + 1)*ik
-    IF(i .EQ. myid) THEN
+    IF(i == myid) THEN
       CALL send_xtoy(f,gt(1),nx,ix_s(i),ix_e(i),iy_s(myid),iy_e(myid),iz1,iz2)
     ELSE
       CALL send_xtoy(f,ft(1),nx,ix_s(i),ix_e(i),iy_s(myid),iy_e(myid),iz1,iz2)

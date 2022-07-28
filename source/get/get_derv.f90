@@ -10,11 +10,11 @@ SUBROUTINE get_derv
 
   iz_ss = izs-1
   iz_ee = ize+1
-  IF(iss .EQ. 0) THEN
+  IF(iss == 0) THEN
     iz_ss = izs
   ENDIF
 
-  IF(ise .EQ. numprocs-1) THEN
+  IF(ise == numprocs-1) THEN
     iz_ee = ize
   ENDIF
 

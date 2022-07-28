@@ -68,9 +68,9 @@ SUBROUTINE tke_budget
     izm1 = iz - 1
 
     ! TREAT TR_TAU AT BOTTOM SPECIAL, TR_TAU = 0.0
-    IF(iz .EQ. 1) tr_tau(izm1) = 0.0
+    IF(iz == 1) tr_tau(izm1) = 0.0
 
-    IF(iz .EQ. nnz) THEN
+    IF(iz == nnz) THEN
       t_tau(iz) = 0.0
       t_wp(iz)  = 0.0
       t_wq(iz)  = 0.0

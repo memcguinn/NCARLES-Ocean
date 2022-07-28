@@ -23,7 +23,7 @@ SUBROUTINE get_means(istage)
   ENDDO
 
   iz_ee = ize
-  IF(ize .EQ. nnz) iz_ee = nnzp1
+  IF(ize == nnz) iz_ee = nnzp1
 
   DO iz=izs,iz_ee
     DO iy=iys,iye
@@ -61,7 +61,7 @@ SUBROUTINE get_means(istage)
   DO iz=izs-1,ize+1
     DO iy=iys,iye
       DO ix=1,nnx
-        e(ix,iy,iz )=AMAX1(e(ix,iy,iz ),sml_eg)
+        e(ix,iy,iz)=AMAX1(e(ix,iy,iz ),sml_eg)
       ENDDO
     ENDDO
   ENDDO

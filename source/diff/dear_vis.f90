@@ -11,15 +11,15 @@ SUBROUTINE dear_vis(alk)
   DO iz=izs-1,ize+1
     izp1 = iz + 1
     dslk  = dsl_z(iz)
-    IF(iz .GT. 0) dslk  = AMIN1(dsl_z(iz),vk*ABS(z(iz))/csmag)
+    IF(iz > 0) dslk  = AMIN1(dsl_z(iz),vk*ABS(z(iz))/csmag)
       almin = almin_c*dsl_z(iz)
-      IF(iz .EQ. 0 .or. iz .EQ. nnz+1) THEN
+      IF(iz == 0 .or. iz == nnz+1) THEN
         dfack = 1.0
       ELSE
         dfack = dfac(iz)
       ENDIF
 
-      IF(ivis .EQ. 1 .AND. iz .LE. nmatch) THEN
+      IF(ivis == 1 .AND. iz <= nmatch) THEN
         ! NO STABILITY CORRECTED LENGTH SCALES
         DO j=iys,iye
           DO i=1,nnx
@@ -31,7 +31,7 @@ SUBROUTINE dear_vis(alk)
           DO i=1,nnx
             alk(i,j,iz) = dslk
             stab = batag*(t(i,j,1,izp1) - t(i,j,1,iz))*dzu_i(izp1)
-            IF(stab.GT.stabmin) THEN
+            IF(stab>stabmin) THEN
               als = stab_c*SQRT(e(i,j,iz)/stab)
               alk(i,j,iz) = AMIN1(dslk,als)
             ENDIF
@@ -49,7 +49,7 @@ SUBROUTINE dear_vis(alk)
       ENDDO
 
       ! SPECIAL CASE FOR IZ = 1
-      IF(iz.EQ.1 .AND. ibcl .EQ. 0) THEN
+      IF(iz==1 .AND. ibcl == 0) THEN
         DO iy=iys,iye
           DO ix=1,nnx
             vis_m(ix,iy,iz-1)  = vis_m(ix,iy,iz)

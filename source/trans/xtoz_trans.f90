@@ -19,7 +19,7 @@ SUBROUTINE xtoz_trans(f,g,nx,nz,ixs,ixe,ix_s,ix_e,iys,iye,izs,ize,iz_s,     &
   DO i=iss,numprocs-1,ncpu_s
     nsend = (ix_e(i) - ix_s(i) + 1)*jk
     nrecv = (iz_e(i) - iz_s(i) + 1)*ij
-    IF(i .EQ. myid) THEN
+    IF(i == myid) THEN
       CALL send_xtoz(f,gt(1),nx,ix_s(i),ix_e(i),iys,iye,iz_s(myid),iz_e(myid))
     ELSE
       CALL send_xtoz(f,ft(1),nx,ix_s(i),ix_e(i),iys,iye,iz_s(myid),iz_e(myid))

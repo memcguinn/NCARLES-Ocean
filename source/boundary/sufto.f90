@@ -9,11 +9,10 @@ SUBROUTINE sufto(it)
 
   ! VERSION OF SIMILARITY THEORY ADAPTED FOR OCEAN FLOWS
   ! OPTION TO USE BUSINGER OR LARGE VERSION OF SIMILARITY THEORY
-
   iz    = 1
   izm1  = iz - 1
   izp1  = iz + 1
-  z1_a  = abs(z1)
+  z1_a  = ABS(z1)
   buf(1)  = 0.0
   buf(2)  = 0.0
   buf(3)  = 0.0
@@ -53,7 +52,7 @@ SUBROUTINE sufto(it)
   t10xy(1)=-qstar(1)/utau*zody*vk74in
 
   ! CHECK FOR TEMPERATURE BC
-  IF(isfc .EQ. 0 ) THEN
+  IF(isfc == 0 ) THEN
     tsfcc(1)=t1xy(1)-t10xy(1)
   ENDIF
 
@@ -64,7 +63,7 @@ SUBROUTINE sufto(it)
   ! SAVE OLD TAU
   utausv = utau
   utau2  = utau*utau
-  IF (ibuoy.EQ.0 .OR. qstar(1) .EQ. 0.) THEN
+  IF (ibuoy==0 .OR. qstar(1) == 0.) THEN
     amonin    = 1000.
     zeta      = 0.
     thstar(1) = 0.0
@@ -74,51 +73,50 @@ SUBROUTINE sufto(it)
     zeta   = z1_a/amonin
   ENDIF
 
-  IF (t10xy(1).LT.0. .AND. qstar(1) .lt. 0.) THEN
+  IF (t10xy(1)<0. .AND. qstar(1) .lt. 0.) THEN
     WRITE(6,1234)u1xy,v1xy,t1xy(1),tsfcc(1),amonin,utau,it
-1234  FORMAT(' ** check sfc u=',e12.3,' v=',e12.3,' t,ts=',2f10.3,' l=',    &
-          e12.3,' u*=',e12.3,' at it=',i5)
-    GO TO 9999
-  ENDIF
 
-  ! FOR STABLE, NEUTRAL, AND UNSTABLE PBL, GET DRIFT VELOCITY
-  IF(ismlt .EQ. 1) THEN
-    CALL busngr(zeta,phim,phis,psim,psis)
+    ! TROUBLE IN SL ROUTINE
+    WRITE(nprt,9000)
+    CALL mpi_finalize(ierr)
+    STOP
   ELSE
-    CALL fzol(zeta,phim,phis,psim,psis)
+    ! FOR STABLE, NEUTRAL, AND UNSTABLE PBL, GET DRIFT VELOCITY
+    IF(ismlt == 1) THEN
+      CALL busngr(zeta,phim,phis,psim,psis)
+    ELSE
+      CALL fzol(zeta,phim,phis,psim,psis)
+    ENDIF
+
+    udrIFt = windm + stokes(1) - stokess + utau*(zody-psim)*vkin
+    vdrIFt = 0.0
+    dnom      = (zody-psis)*vk74in
+    IF (isfc==1) THEN
+      thstar(1) = (t1xy(1) - tsfcc(1))/dnom
+      t10xy(1)  = thstar(1)*dnom
+      qstar(1)  = - utau*thstar(1)
+    ELSE
+      thstar(1)  = -qstar(1)/utau
+      tsfcc(1)   = t1xy(1)-thstar(1)*dnom
+      t10xy(1)   = thstar(1)*dnom
+    ENDIF
+
+    zol = zeta
+    hol = zol*zi/z1
+
+    ! EXAMPLES OF TWO OTHER SCALARS
+    ! NOTE ROUNDOFF PROBLEM IN ANGLES ARE CLOSE TO MULTIPLES OF PI
+    utau2 = utau*utau
+    au13m = utau2
+    au23m = 0.0
+    aut3m(1)= wtsfc(1)
   ENDIF
-
-  udrIFt = windm + stokes(1) - stokess + utau*(zody-psim)*vkin
-  vdrIFt = 0.0
-  dnom      = (zody-psis)*vk74in
-  IF (isfc.EQ.1) THEN
-    thstar(1) = (t1xy(1) - tsfcc(1))/dnom
-    t10xy(1)  = thstar(1)*dnom
-    qstar(1)  = - utau*thstar(1)
-  ELSE
-    thstar(1)  = -qstar(1)/utau
-    tsfcc(1)   = t1xy(1)-thstar(1)*dnom
-    t10xy(1)   = thstar(1)*dnom
-  ENDIF
-
-  zol = zeta
-  hol = zol*zi/z1
-
-  ! EXAMPLES OF TWO OTHER SCALARS
-  ! NOTE ROUNDOFF PROBLEM IN ANGLES ARE CLOSE TO MULTIPLES OF PI
-  utau2 = utau*utau
-  au13m = utau2
-  au23m = 0.0
-  aut3m(1)= wtsfc(1)
 
   RETURN
-  ! TROUBLE IN SL ROUTINE
-9999 CONTINUE
 
-  WRITE(nprt,9000)
-9000 FORMAT(' Trouble in SR. sufto')
+! FORMAT
+9000  FORMAT(' Trouble in SR. sufto')
+1234  FORMAT(' ** check sfc u=',e12.3,' v=',e12.3,' t,ts=',2f10.3,' l=',    &
+            e12.3,' u*=',e12.3,' at it=',i5)
 
-  CALL mpi_finalize(ierr)
-
-  STOP
 END SUBROUTINE

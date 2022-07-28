@@ -16,8 +16,8 @@ SUBROUTINE fzol(zeta,phim,phis,psim,psis)
   Xs(zol)   = SQRT(1.0 - 16.0*zol)
   Xc(zol,f) =  ABS(1.0 - f*zol)**(4.0/3.0)/(1.0 - f*zol)
 
-  IF(zeta.GE.0.0) THEN
-    IF(zeta.LE.1.0) THEN
+  IF(zeta>=0.0) THEN
+    IF(zeta<=1.0) THEN
       phim = 1.0 + c1 * zeta
       psim = - c1 * zeta
       phis = phim

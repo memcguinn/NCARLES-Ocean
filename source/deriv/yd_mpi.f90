@@ -1,6 +1,5 @@
 SUBROUTINE yd_mpi(ay,trigy,yk,nx,ny,ixs,ixe,ix_s,ix_e,iys,iye,iy_s,iy_e,    &
   iz1,iz2,myid,ncpu,np)
-
 ! GET MULTIPLE Y DERIVATIVES USING FFTPACK ROUTINES AND MPI
 ! USE FFTPACK STORAGE A_O, (A1,B1), (A2,B2), ...
 ! ASSUMES THAT FIRST WAVENUMBER YK(1) = 0.0

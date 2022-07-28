@@ -19,11 +19,11 @@ SUBROUTINE comp_p
   nt = myid + ncpu_s
 
   ! SEND BOTH R3 AND UPDATED W (FROM COMP1) TO PROCESSOR ABOUT THE CURRENT MYID
-  IF(iss .EQ. 0) THEN
+  IF(iss == 0) THEN
     nb = mpi_proc_null
   ENDIF
 
-  IF(ise .EQ. numprocs-1) THEN
+  IF(ise == numprocs-1) THEN
     nt = mpi_proc_null
   ENDIF
 
@@ -39,7 +39,7 @@ SUBROUTINE comp_p
   CALL mpi_sendrecv(fs(1,iys,1),nsend,mpi_real8,nt,2,fr(1,iys,1),nrecv,     &
         mpi_real8,nb,2,mpi_comm_world,istatus,ierr)
 
-  IF(iss .NE. 0) THEN
+  IF(iss /= 0) THEN
     DO iy=iys,iye
       DO ix=1,nnx
         r3(ix,iy,izs-1) = fr(ix,iy,1)
@@ -60,14 +60,14 @@ SUBROUTINE comp_p
 
     CALL xderivp(fnt1(1,iys,iz),trigx(1,1),xk(1),nnx,iys,iye)
 
-    IF(iz .EQ. 1) THEN
+    IF(iz == 1) THEN
       DO iy=iys,iye
         DO ix=1,nnx
           p(ix,iy,iz) = fnt1(ix,iy,iz) + ((w(ix,iy,iz) -wbc(ix,iy,2))*gami+ &
                 r3(ix,iy,iz))*dzw_i(iz)
         ENDDO
       ENDDO
-    ELSE IF(iz .EQ. nnz) THEN
+    ELSE IF(iz == nnz) THEN
       DO iy=iys,iye
         DO ix=1,nnx
           p(ix,iy,iz) = fnt1(ix,iy,iz) + ((wbc(ix,iy,1) - w(ix,iy,izm1))*   &
@@ -85,7 +85,7 @@ SUBROUTINE comp_p
   ENDDO
 
   ! CHECK FOR RADIATION BC, ALL PROCESSORS
-  IF(ibcu .EQ. 1) THEN
+  IF(ibcu == 1) THEN
     DO iy=iys,iye
       DO ix=1,nnx
         ptop(ix,iy,1) = pbc(ix,iy,1)

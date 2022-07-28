@@ -18,7 +18,7 @@ SUBROUTINE ztox_trans(g,f,nx,nz,ixs,ixe,ix_s,ix_e,iys,iye,izs,ize,iz_s,   &
   DO i=iss,numprocs-1,ncpu_s
     nsend = (iz_e(i) - iz_s(i) + 3)*ij
     nrecv = (ix_e(i) - ix_s(i) + 1)*jk
-    IF(i .EQ. myid) THEN
+    IF(i == myid) THEN
       CALL send_ztox(g,ft(1),nz,ix_s(myid),ix_e(myid),iys,iye,iz_s(i),iz_e(i))
     ELSE
       CALL send_ztox(g,gt(1),nz,ix_s(myid),ix_e(myid),iys,iye,iz_s(i),iz_e(i))

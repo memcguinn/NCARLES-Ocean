@@ -19,7 +19,7 @@ SUBROUTINE rhs_scl(istep,iscl)
   ! SET SIGN FOR OCEAN SIMULATIONS THAT USE MONOTONE
   sgn = -1.0
   upwn = 2.0
-  IF(iupwnd .NE. 1) upwn = 1.0
+  IF(iupwnd /= 1) upwn = 1.0
 
   ! OUTER LOOP OVER Z
   DO iz=izs,ize
@@ -42,7 +42,7 @@ SUBROUTINE rhs_scl(istep,iscl)
     CALL xderivp(tx(1,iys),trigx(1,1),xk(1),nnx,iys,iye)
 
     ! COMPUTE TAU_T3 AT IZ-1
-    IF (iz.NE.1 .OR. ibcl.NE.0) THEN
+    IF (iz/=1 .OR. ibcl/=0) THEN
       DO iy=iys,iye
         DO ix=1,nnx
           taut3_l(ix,iy,iscl) = -vis_sv(ix,iy,izm1)*(t(ix,iy,iscl,iz) -   &
@@ -78,7 +78,7 @@ SUBROUTINE rhs_scl(istep,iscl)
       ENDDO
     ENDDO
 
-    IF(iupwnd .NE. 1) THEN
+    IF(iupwnd /= 1) THEN
 
       ! SKEW SYMMETRIC ADVECTIVE FORM FOR VERTICAL FLUX = 0.5(WDT/DZ + D/DZ(WT))
       DO iy=iys,iye
@@ -96,12 +96,12 @@ SUBROUTINE rhs_scl(istep,iscl)
       ENDDO
     ELSE
       ! Z-DIRECTION SPECIAL
-      IF(iz .EQ. 1) THEN
+      IF(iz == 1) THEN
         DO iy=iys,iye
           DO ix=1,nnx
 
             ! AIR-SEA FLUX BC
-            IF(iscl.EQ.2)THEN
+            IF(iscl==2)THEN
               Sc = 0.0d0
               kconst = 0.0d0
               tscal = 0.0d0
@@ -129,7 +129,7 @@ SUBROUTINE rhs_scl(istep,iscl)
                   t(ix,iy,iscl,izp1),t(ix,iy,iscl,izp2)))
           ENDDO
         ENDDO
-      ELSE IF(iz .EQ. nnz) THEN
+      ELSE IF(iz == nnz) THEN
         DO iy=iys,iye
           DO ix=1,nnx
             flux_u(ix,iy) = sgn*0.5*w(ix,iy,iz)*(t(ix,iy,iscl,izp1)+      &
@@ -168,7 +168,7 @@ SUBROUTINE rhs_scl(istep,iscl)
     ENDIF
 
     ! SAVE SGS FLUXES FOR PRINTOUT, GATHER SUMS ON EXIT
-    IF(istep .EQ. 1) THEN
+    IF(istep == 1) THEN
       utsb(iz,iscl) = 0.0
       wtsb(iz,iscl) = 0.0
       DO iy=iys,iye
@@ -208,7 +208,7 @@ SUBROUTINE rhs_scl(istep,iscl)
       ENDDO
     ENDDO
 
-    IF(iupwnd .NE. 1) THEN
+    IF(iupwnd /= 1) THEN
       DO iy=iys,iye
         DO ix=1,nnx
           r4(ix,iy,iscl,iz) = r4(ix,iy,iscl,iz) - 0.5*(v(ix,iy,iz)+       &
@@ -231,7 +231,7 @@ SUBROUTINE rhs_scl(istep,iscl)
   ENDDO
 
   ! SAVE SGS FLUXES FOR PRINTOUT
-  IF(istep .EQ. 1) THEN
+  IF(istep == 1) THEN
     DO iz=izs,ize
       vtsb(iz,iscl) = 0.0
       DO iy=iys,iye

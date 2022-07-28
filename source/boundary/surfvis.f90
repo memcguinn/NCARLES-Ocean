@@ -16,7 +16,7 @@ SUBROUTINE surfvis(it)
   vise   = 0.0
 
   ! ONLY ROOT PROCESS(ES) COMPUTE
-  IF(iss .EQ. 0) THEN
+  IF(iss == 0) THEN
     iz   = 1
     izm1 = iz - 1
     izp1 = iz + 1
@@ -24,13 +24,13 @@ SUBROUTINE surfvis(it)
 
     CALL sufto(it)
 
-    IF(qstar(1) .EQ. 0.) THEN
+    IF(qstar(1) == 0.) THEN
       zeta = 0.0
     ELSE
       zeta = ABS(z(1))/amonin
     ENDIF
 
-    IF(ismlt .EQ. 1) THEN
+    IF(ismlt == 1) THEN
       CALL busngr(zeta,phim,phis,psim,psis)
     ELSE
       CALL fzol(zeta,phim,phis,psim,psis)
@@ -97,9 +97,6 @@ SUBROUTINE surfvis(it)
     xksurf =  xkz1 - xkavg
     xksurf = AMAX1(xksurf,0.0)
     xksurf = AMIN1(xksurf,vise)
-
-    6000 FORMAT(' dfac = ',e12.4,' xkavg = ',e12.4,' xkz1 = ',e12.4,/,      &
-            ' vise = ',e12.4,' xksurf = ',e12.4)
   ENDIF
 
   ! BROADCAST VALUES TO OTHER PROCESSES
@@ -114,4 +111,9 @@ SUBROUTINE surfvis(it)
   vise   = send(3)
 
   RETURN
+
+! FORMAT
+6000  FORMAT(' dfac = ',e12.4,' xkavg = ',e12.4,' xkz1 = ',e12.4,/,         &
+            ' vise = ',e12.4,' xksurf = ',e12.4)
+
 END SUBROUTINE

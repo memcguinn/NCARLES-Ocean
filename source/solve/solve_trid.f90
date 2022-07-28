@@ -37,7 +37,7 @@ SUBROUTINE solve_trid(pt, ptop)
     ENDDO
 
     ! UPPER BOUNDARY, FILL EXTERIOR PRESSURE (NOT USED)
-    IF(ibcu .EQ. 1) THEN
+    IF(ibcu == 1) THEN
       DO lp=jxs,jxe
         bb(nnz,lp) = 0.0
         aa(nnz,lp) = 0.0
@@ -56,7 +56,7 @@ SUBROUTINE solve_trid(pt, ptop)
     ENDIF
 
     ! SPECIAL SITUATION FOR ZEROTH MODE MAKES MEAN PRESSURE = 0
-    IF(kp .EQ. 1 .AND. jxs .EQ. 1) THEN
+    IF(kp == 1 .AND. jxs == 1) THEN
       DO iz=1,nnz
         dd(iz,1) = 1.0
         rh(iz,1) = 0.0

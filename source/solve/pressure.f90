@@ -27,7 +27,7 @@ SUBROUTINE pressure
         jxe,jx_s,jx_e,iys,iye,iy_s,iy_e,izs,ize,myid,ncpu_s,numprocs,-2)
 
   ! FOURIER ANALYZE THE RADIATION BC ARRAYS
-  IF(ibcu .EQ. 1) THEN
+  IF(ibcu == 1) THEN
     CALL fft2d_mpi(ptop(1,iys,1),ptopfft(1,jxs,1),trigx(1,1),trigc,nnx,nny, &
           jxs,jxe,jx_s,jx_e,iys,iye,iy_s,iy_e,1,2,myid,ncpu_s,numprocs,-2)
   ENDIF
@@ -43,7 +43,7 @@ SUBROUTINE pressure
         iz_e,myid,ncpu_s,numprocs)
 
   iz_ee = ize+1
-  IF(ise .EQ. numprocs-1) THEN
+  IF(ise == numprocs-1) THEN
     iz_ee = ize
   ENDIF
 

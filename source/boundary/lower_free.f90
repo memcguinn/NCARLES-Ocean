@@ -17,7 +17,7 @@ SUBROUTINE lower_free(it)
   REAL :: rbuf((2+2*nscl)*nnx*(iye+1-iys))
 
   ! BROADCAST LEVEL 1 DATA EVERYWHERE
-  IF(iss .EQ. 0) THEN
+  IF(iss == 0) THEN
     DO iy=iys,iye
       DO ix=1,nnx
         u_level1(ix,iy,1) = u(ix,iy,1)
@@ -43,7 +43,7 @@ SUBROUTINE lower_free(it)
   CALL suft2(u_level1,it)
 
   ! SEND SURFACE SCALARS AND MOMENTUM FLUXES BACK TO ROOT(S)
-  IF(numprocs .NE. 1) THEN
+  IF(numprocs /= 1) THEN
     DO iy=iys,iye
       DO ix=mxs,mxe
         sbuf(1,ix,iy)  = tau13m(ix,iy)
@@ -60,8 +60,8 @@ SUBROUTINE lower_free(it)
       ENDDO
     ENDDO
 
-    irow_r = mod(myid,ncpu_s)
-    IF(myid .GE. ncpu_s) THEN
+    irow_r = MOD(myid,ncpu_s)
+    IF(myid >= ncpu_s) THEN
       num = (2+2*nscl)*(mxe+1-mxs)*(iye+1-iys)
       CALL mpi_send(sbuf(1,mxs,iys),num,mpi_REAL8,irow_r,1,mpi_comm_world,ierr)
     ELSE
@@ -73,13 +73,13 @@ SUBROUTINE lower_free(it)
       ENDDO
     ENDIF
 
-  ELSEIF(numprocs .EQ. 1) THEN
+  ELSEIF(numprocs == 1) THEN
     CONTINUE
   ENDIF
 
 ! ONLY FOR ROOT ROW = 0
 ! GET SUMS OF SURFACE CONDITIONS AND SET SURFACE BOUNDARY CONDITIONS
-  IF(iss .EQ. 0) THEN
+  IF(iss == 0) THEN
     buf(1) = 0.0
     buf(2) = 0.0
     DO iy=iys,iye

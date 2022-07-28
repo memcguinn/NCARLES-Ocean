@@ -29,7 +29,7 @@ SUBROUTINE xy_stats
   m5 = js + 4*nscl
 
   sgn = 1.0
-  IF(iupwnd .EQ. 1) sgn = -1.0
+  IF(iupwnd == 1) sgn = -1.0
 
   DO iz=izs,ize
     izp2 = iz + 2
@@ -56,7 +56,7 @@ SUBROUTINE xy_stats
 
     ! GET SCALAR RESOLVED FLUXES AND VARIANCES
     DO l=1,nscl
-      IF(iupwnd .NE. 1 .or. iz .EQ. nnz) THEN
+      IF(iupwnd /= 1 .or. iz == nnz) THEN
         DO iy=iys,iye
           DO ix=1,nnx
             stat(iz,m1+l)=stat(iz,m1+l) + (w(ix,iy,iz)-wxym(iz))*0.5*       &
